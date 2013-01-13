@@ -1,0 +1,327 @@
+h2 {
+	font-size: 16px;
+	margin: 2px 0px;
+}
+
+h3 {
+	font-size: 20px;
+}
+
+label {
+	display: inline;
+}
+
+input {
+	color: #555555 !important;
+}
+
+.hero-unit {
+	text-align: center;
+}
+
+.hero-unit h1 {
+	margin-bottom: 15px;
+}
+
+div#heading {
+	text-align: center;
+	margin: 30px 0px 10px;
+}
+
+div#heading p {
+	font-size: 16px;
+}
+
+div#heading h1 {
+	font-size: 48px;
+	margin: 30px 0px;
+}
+
+.loading-image-spacer {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+}
+
+.loading-image-container {
+	width: 16px;
+	height: 16px;
+	margin-left: 5px;
+	display: inline-block;
+}
+
+.loading-image {
+	width: 16px;
+	height: 16px;
+}
+
+.announce {
+	color: #B94A48;
+	font-weight: bold;
+}
+
+.page {
+	border-left: 1px solid #dddddd;
+	border-right: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
+	border-radius: 4px;
+	padding: 10px;
+	height: 600px;
+}
+
+div.social-buttons {
+	margin-top: 20px;
+}
+
+div.social-buttons div {
+	float: right;
+	margin-left: 10px;
+}
+
+div.buttons {
+	text-align: center;
+	clear: both;
+	padding-top: 10px;
+}
+
+div.buttons button {
+	width: 170px;
+	margin-left: 20px;
+}
+
+ul.steps {
+	margin: 0px;
+}
+
+ul.steps li {
+	display: block;
+	float: left;
+}
+
+ul.steps li div {
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+	text-align: center;
+	padding: 10px;
+}
+
+ul.steps li#steps-1 {
+	width: 33%;
+}
+
+ul.steps li#steps-2 {
+	width: 34%;
+}
+
+ul.steps li#steps-3 {
+	width: 33%;
+}
+
+ul.steps li.active {
+	background-color: #fcf8e3;
+	font-weight: bold;
+}
+
+#input-kuler-container {
+	clear: both;
+}
+
+form#input-kuler {
+}
+
+form#input-kuler div {
+}
+
+div#input-colourlovers-id-container {
+	margin-top: 20px;
+}
+
+p.input-api-particular {
+	margin-left: 20px;
+}
+
+input.input-id {
+	margin-bottom: 0px;
+	font-size: 130%;
+	height: 26px;
+	width: 300px;
+}
+
+input[type="radio"] {
+	margin: 0px 3px 0px 0px;
+}
+
+input#forward-to-select-color-button {
+}
+
+#input-kuler-explain {
+	margin-top: 30px;
+	font-size: 90%;
+}
+
+#input-kuler-explain img {
+	padding: 10px 10px 0px 10px;
+}
+
+#input-kuler-explain button {
+	font-size: 95%;
+}
+
+#input-kuler-container .buttons {
+	padding-top: 10px;
+}
+
+div#select-color-container {
+	clear: both;
+}
+
+div#input-select-color-container {
+	float: left;
+	width: 540px;
+}
+
+div#preview-container {
+	float: left;
+	width: 360px;
+	margin-left: 10px;
+}
+
+div#preview-iframe-container {
+	width: 360px;
+	height: 360px;
+	clear: both;
+}
+
+table#selected-color-table {
+}
+
+table#selected-color-table td.selected-color-item-td {
+	text-align: center;
+	white-space: nowrap;
+	width: 250px;
+}
+
+span.selected-color-item {
+	display: block;
+	float: left;
+	width: 18px;
+	height: 18px;
+	margin: 5px;
+	padding: 1px;
+	border: none;
+	cursor: pointer;
+}
+
+.selected-color-item-page {
+	width: 200px;
+	text-align: left;
+}
+
+#preview {
+	width: 360px;
+	height: 380px;
+}
+
+div#download-container {
+	clear: both;
+}
+
+div#download-container h5 {
+	margin-top: 20px;
+}
+
+#download-container .buttons {
+	padding-top: 40px;
+	clear: both;
+}
+
+#download-list-left {
+	width: 480px;
+}
+
+#download-list-right {
+	width: 430px;
+}
+
+.download-link-zip {
+	font-size: 160%;
+}
+
+.download-link {
+	font-size: 120%;
+}
+
+.download-explain {
+	font-size: 90%;
+}
+
+#selecting-kuler-theme-container {
+	font-size: 90%;
+	line-height: 18px;
+}
+
+#descriptions {
+	margin-top: 20px;
+}
+
+#example-screenshots {
+	margin: 40px 0px;
+	text-align: center;
+}
+
+#example-screenshots img {
+	margin: 0px 10px;
+}
+
+.lr-pager-left-arrow {
+	display: block;
+	float: left;
+	width: 20px;
+	height: 20px;
+	padding-top: 10px;
+	cursor: pointer;
+}
+
+.lr-pager-right-arrow {
+	display: block;
+	float: left;
+	width: 20px;
+	height: 20px;
+	padding-top: 10px;
+	cursor: pointer;
+}
+
+#other-services {
+	font-size: 80%;
+	margin-bottom: 10px;
+}
+
+#other-services ul {
+	display: inline;
+	margin: 0px;
+}
+
+#other-services ul li {
+	display: inline;
+	margin-right: 10px;
+}
+
+#footer {
+	font-size: 12px;
+}
+
+#footer-link {
+	text-align: center;
+	font-size: 11px;
+}
+
+#footer-link ul {
+	list-style-type: none;
+	text-align: center;
+}
+
+#footer-link ul li {
+	display: inline;
+	margin: 0px 10px;
+}
+

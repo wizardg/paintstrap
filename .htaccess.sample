@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteBase /
+RewriteRule glyphicons-halflings\.png$ img/glyphicons-halflings.png
+RewriteRule glyphicons-halflings-white\.png$ img/glyphicons-halflings-white.png
