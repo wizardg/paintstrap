@@ -2,3 +2,7 @@
 /.buildpath
 /.project
 /.settings
+/output/*
+!/output/.gitkeep
+/var/cache/*
+!/var/cache/.gitkeep
