@@ -13,7 +13,7 @@ require_once("Cache/Lite.php");
 
 define("COLOR_INPUT_NUM", 7);
 
-define("OUTPUT_VERSION", "4");
+define("OUTPUT_VERSION", "5");
 
 function connect_db() {
 	try {
