@@ -55,6 +55,28 @@ div#heading h1 {
 	height: 16px;
 }
 
+.share-container {
+}
+
+.share-container input[type="checkbox"] {
+	margin: 0;
+}
+
+.share-container p {
+	margin-bottom: 2px;
+}
+
+
+.share-container .share-checkbox-container {
+	display: inline-block;
+	width: 20px;
+}
+
+.gallery-explain {
+	font-size: 85%;
+	margin-left: 20px;
+}
+
 .announce {
 	color: #B94A48;
 	font-weight: bold;
@@ -66,7 +88,7 @@ div#heading h1 {
 	border-bottom: 1px solid #dddddd;
 	border-radius: 4px;
 	padding: 10px;
-	height: 600px;
+	height: 620px;
 }
 
 div.social-buttons {
@@ -155,7 +177,7 @@ input#forward-to-select-color-button {
 }
 
 #input-kuler-explain {
-	margin-top: 30px;
+	margin-top: 50px;
 	font-size: 90%;
 }
 
@@ -188,8 +210,12 @@ div#preview-container {
 
 div#preview-iframe-container {
 	width: 360px;
-	height: 360px;
+	height: 380px;
 	clear: both;
+}
+
+span.open-large-preview-container {
+	margin-left: 40px;
 }
 
 table#selected-color-table {
@@ -258,6 +284,7 @@ div#download-container h5 {
 #selecting-kuler-theme-container {
 	font-size: 90%;
 	line-height: 18px;
+	margin-top: 20px;
 }
 
 #descriptions {

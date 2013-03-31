@@ -25,13 +25,9 @@ var initial_selected_colors = {
 
 var initial_selected_color_id = "";
 
-//var input_kuler_id = "";
 
-
-$(function() {
+$(document).ready(function(){
 	var i, j;
-	
-	initSocialButtons();
 	
 	for (i = 0; i < COLOR_INPUT_NUM; i++) {
 		for (j = 0; j < COLOR_NUM; j++) {
@@ -46,7 +42,6 @@ $(function() {
 	});
 	
 	$("#back-to-input-kuler-button").click(function() {
-		//$("#preview").hide();
 		updateStep(1);
 	});
 	
@@ -55,25 +50,18 @@ $(function() {
 		$("#select-color-container .buttons .loading-image").show();
 
 		param = $("#selected-color-form").serialize();
-		//if (package_cache[param]) {
-		if (false) {
-			applyDownloadLink(package_cache[param]);
-			postShowDownloadPage();
-		}
-		else {
-			$.getJSON("api/package.php?" + $("#selected-color-form").serialize(), {}, function(json) {
-				if (json) {
-					package_cache[param] = json;
+		$.getJSON(BASE_URL + "api/package?" + $("#selected-color-form").serialize(), {}, function(json) {
+			if (json) {
+				package_cache[param] = json;
 
-					applyDownloadLink(json);
-					postShowDownloadPage();
-				}
-				else {
-					enableSelectColorPageButtons();
-					alert(ERROR_MESSAGES.generate_error);
-				}
-			});
-		}
+				applyDownloadLink(json);
+				postShowDownloadPage();
+			}
+			else {
+				enableSelectColorPageButtons();
+				alert(ERROR_MESSAGES.generate_error);
+			}
+		});
 		return false;
 	});
 
@@ -115,11 +103,14 @@ $(function() {
 		submitInputKulerID();
 	});
 	
+	$("#open-large-preview").click(function() {
+		openLargePreview();
+	});
+	
 	updateStep(1);
 	enableInputKulerPageButtons();
 	enableSelectColorPageButtons();
 
-	//$("#preview").attr("src", "preview_dummy.html?t=" + getTimestamp());
 	$("#input-kuler-id").val("");
 	$("#input-colourlovers-id").val("");
 	
@@ -129,28 +120,6 @@ $(function() {
 	$("#input-colourlovers-id").focus();
 });
 	
-function initSocialButtons() {
-	$('#hatena').socialbutton('hatena', {
-		button: 'simple'
-	});
-
-	$('#twitter').socialbutton('twitter', {
-		button: 'none',
-		text: 'PaintStrap',
-		via: 'wiz_g'
-	});
-
-	$('#google_plusone').socialbutton('google_plusone', {
-		lang: 'ja',
-		size: 'medium',
-		count: false
-	});
-
-	$('#facebook_like').socialbutton('facebook_like', {
-		button: 'button_count'
-	});
-}
-
 function changeColorSchemeAPI(api_type) {
 	$("p.input-api-particular").each(function() {
 		$(this).find("input").attr("disabled", "disabled");
@@ -239,13 +208,11 @@ function submitInputKulerID() {
 		postShowSelectColorPage();
 	}
 	else {
-		//$("#preview").hide();
-		
 		data = {
 			api_type: api_type,
 			id: input_id
 		};
-		$.getJSON("api/call_color_scheme_api.php", data, function(json) {
+		$.getJSON(BASE_URL + "api/get_color_scheme", data, function(json) {
 			if (json) {
 				if (json.record != undefined && json.record > 0) {
 					kuler_api_cache[api_type][input_id] = json;
@@ -282,8 +249,6 @@ function convertZenkakuToHankaku(str) {
 }
 
 function applySelectColorTable(json) {
-	//input_kuler_id = $("#input-kuler-id").val();
-	
 	var i, j;
 
 	for (i = 0; i < COLOR_INPUT_NUM; i++) {
@@ -320,16 +285,6 @@ function applySelectColorTable(json) {
 		for (i = 0; i < COLOR_INPUT_NUM; i++) {
 			lrPager.reset("#color-" + i);
 			
-			/*
-			default_selection = i;
-			while (default_selection >= json.hex.length) {
-				default_selection -= json.hex.length;
-			}
-			
-			radio = $("#color-" + i + " input").eq(default_selection);
-			radio.attr("checked", true);
-			*/
-			
 			if (initial_selected_color_id == "default") {
 				if (json.hex.length > 1 && json.hex.length < 5) {
 					initial_selected_color_id = "default_" + json.hex.length + "_colors"; 
@@ -340,13 +295,9 @@ function applySelectColorTable(json) {
 		}
 		updatePreview();
 	}
-	else {
-		//$("#preview").show();
-	}
 	
 	c = $("#selecting-kuler-theme-container");
 	c.find("#theme-name").text(json.title);
-	//c.find("#theme-url a").attr("href", json.link).text(json.link);
 	c.find("#theme-url a").attr("href", json.link);
 	c.find("#theme-id").text(json.themeID);
 	c.find("#theme-artist").text(json.authorLabel);
@@ -404,17 +355,10 @@ function changeSelectedColor(i, j) {
 		}
 	}
 }
-/*
-function getTimestamp() {
-	var ts = Math.round(new Date().getTime() / 1000);
-	return ts;
-}
-*/
 
 function updatePreview() {
 	$("#loading-image-preview").show();
-	//$("#preview").attr("src", "preview.php?t=" + getTimestamp() + "&" + $("#selected-color-form").serialize());
-	$html = '<iframe id="preview" src="preview.php?' + $("#selected-color-form").serialize() + '"></iframe>';
+	$html = '<iframe id="preview" src="' + BASE_URL + 'preview?' + $("#selected-color-form").serialize() + '"></iframe>';
 	$("#preview-iframe-container").html($html);
 }
 
@@ -471,4 +415,9 @@ function postShowDownloadPage() {
 function enableSelectColorPageButtons() {
 	$("#select-color-container .buttons button").removeAttr("disabled");
 	$("#select-color-container .buttons .loading-image").hide();
+}
+
+function openLargePreview() {
+	$url = BASE_URL + 'preview?' + $("#selected-color-form").serialize() + "&design=hero";
+	window.open($url, "_blank");
 }

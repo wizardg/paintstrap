@@ -1,0 +1,159 @@
+{% import "macros.html" as macros %}
+{% extends "en/base.html" %}
+
+{% block title %}PaintStrap Gallery - Download beautiful Twitter Bootstrap color themes{% endblock %}
+
+{% block head %}
+	<meta name="description" content="Download Twitter Bootstrap color themes that submited from PaintStrap. The themes are colored beautifully in color scheme which is posted to Adobe kuler / COLOURlovers."> 
+	<link rel="canonical" href="http://paintstrap.com/gallery/">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="{{ base_url }}css/gallery.css">
+	<script type="text/javascript" src="{{ base_url }}js/jquery.socialbutton-1.9.0.min.js"></script>
+	<script type="text/javascript" src="{{ base_url }}js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="{{ base_url }}js/common.js"></script>
+	<script type="text/javascript" src="{{ base_url }}js/gallery.js"></script>
+	<script type="text/javascript">
+	<!--
+	var BASE_URL = {{ base_url | json_encode | raw }};
+    var ERROR_MESSAGES = {
+        generate_error: "CSS files generate error."
+    };
+	//-->
+	</script>
+{% endblock %}
+
+{% block my_url %}gallery/{% endblock %}
+
+{% block heading %}
+	<div id="heading">
+		<h1>PaintStrap Gallery</h1>
+		<p>
+		    Download beautiful Twitter Bootstrap color themes
+		</p>
+		<div class="social-buttons">&nbsp;
+			<div id="facebook_like"></div>
+			<div id="twitter"></div>
+			<div id="google_plusone"></div>
+			<div id="hatena"></div>
+			<div id="github_star"><iframe src="http://ghbtns.com/github-btn.html?user=wizardg&repo=paintstrap&type=watch&count=false"
+	  allowtransparency="true" frameborder="0" scrolling="0" width="52" height="20"></iframe></div>
+			<div style="clear: both;"></div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<div class="row search-container">
+	    <form action="{{ base_url }}gallery" method="get">
+	    <input type="hidden" name="page" value="{{ pagerfanta.getCurrentPage() }}">
+    		Color:
+    		<select name="tag_names[]" class="search-by-color">
+    			<option value="">All</option>
+                {{ macros.tag_name_option("White", "white", tag_names) }}
+                {{ macros.tag_name_option("Black", "black", tag_names) }}
+                {{ macros.tag_name_option("Gray", "gray", tag_names) }}
+                {{ macros.tag_name_option("Red", "red", tag_names) }}
+                {{ macros.tag_name_option("Yellow", "yellow", tag_names) }}
+                {{ macros.tag_name_option("Yellow green", "yellow_green", tag_names) }}
+                {{ macros.tag_name_option("Green", "green", tag_names) }}
+                {{ macros.tag_name_option("Aqua blue", "aqua_blue", tag_names) }}
+                {{ macros.tag_name_option("Blue", "blue", tag_names) }}
+                {{ macros.tag_name_option("Violet", "violet", tag_names) }}
+                {{ macros.tag_name_option("Purple", "purple", tag_names) }}
+    		</select>
+    		Saturation:
+    		<select name="tag_names[]" class="search-by-saturation">
+    			<option value="">All</option>
+                {{ macros.tag_name_option("High", "high_saturation", tag_names) }}
+                {{ macros.tag_name_option("Normal", "normal_saturation", tag_names) }}
+                {{ macros.tag_name_option("Low", "low_saturation", tag_names) }}
+    		</select>
+    		Lightness:
+    		<select name="tag_names[]" class="search-by-lightness">
+    			<option value="">All</option>
+                {{ macros.tag_name_option("High", "high_lightness", tag_names) }}
+                {{ macros.tag_name_option("Normal", "normal_lightness", tag_names) }}
+                {{ macros.tag_name_option("Low", "low_lightness", tag_names) }}
+    		</select>
+    		<button type="submit" class="btn btn-primary">Search</button>
+        </form>
+	</div>
+	
+	<div class="page-info">
+	    <p>Found {{ pagerfanta.getNbResults() }} themes</p>
+	</div>
+	
+	{% if themes | length == 0 %}
+	   <p>Sorry, there aren't any themes that match your search criteria. Please try again.</p>
+	{% else %}
+    	<div class="item">
+            <ul class="row thumbnails">
+                {% for theme in themes %}
+                <li class="span3 theme-{{ theme.theme_id }}">
+                    <div class="thumbnail">
+                        {% if theme.api_type == "kuler" %}
+                            <p class="using-color-scheme-container">
+                                <span class="kuler-icon">&nbsp;</span>
+                                <a href="http://kuler.adobe.com/index.cfm#themeID/{{ theme.cs_id }}" target="_blank">kuler #{{ theme.cs_id }}</a>
+                            </p>
+                        {% elseif theme.api_type == "colourlovers" %}
+                            <p class="using-color-scheme-container">
+                                <span class="colourlovers-icon">&nbsp;</span>
+                                <a href="http://www.colourlovers.com/palette/{{ theme.cs_id }}" target="_blank">COLOURlovers #{{ theme.cs_id }}</a>
+                            </p>
+                        {% endif %}
+                        <img class="thumbnail-image" src="{{ theme._url_thumbnail }}" alt="">
+                        <h4 class="theme-name">{{ theme.cs_name }}</h4>
+                        <p>
+                            Added: {{ theme._created_at_utc | date("m.d.Y", false) }}
+                        </p>
+                        <p><a href="{{ base_url }}preview_by_id/{{ theme.theme_id }}?design=hero" target="_blank">Preview</a> | <a id="download-link-{{ theme.theme_id }}" class="gallery-download-link" href="#download-dialog" role="button" data-toggle="modal">Download</a></p>
+                    </div>
+                </li>
+                {% if loop.index0 % 4 == 3 %}
+                </ul>
+                <ul class="row thumbnails">
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+        
+    {{ pager_html | raw }}
+    
+    <div id="explain" class="well">
+        PaintStrap Gallery places themes made in <a href="{{ base_url }}{{ lang }}">PaintStrap</a>.<br>
+        When you use PaintStrap, you can easily make beautiful Twitter Bootstrap theme using color scheme which is posted to Adobe kuler / COLOURlovers.<br>
+        <br>
+        Please check a license of Twitter Bootstrap and a color scheme when you use a theme.
+    </div>
+
+    <div id="download-dialog" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="download-dialog-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×
+            </button>
+            <h3 id="download-dialog-label">Download - <span id="download-dialog-theme-name"></span></h3>
+        </div>
+        <div class="modal-body">
+            <form id="download-dialog-form" action="" method="get">
+                <div id="download-dialog-generating">
+                    Generating CSS files. Please wait... <img id="loading-image-preview" class="loading-image" src="{{ base_url }}img/ajax-loader.gif" alt="loading" class="hide">
+                </div>
+                <div id="download-dialog-ready" class="hide">
+                    <p>Click button to start downloading.</p>
+                    <p>
+                        <button class="btn btn-primary">
+                            Download
+                        </button>
+                    </p>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">
+                Close
+            </button>
+        </div>
+    </div>
+{% endblock %}

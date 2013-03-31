@@ -1,0 +1,92 @@
+{% import "macros.html" as macros %}
+<!DOCTYPE HTML>
+<html lang="ja-JP">
+	<head>
+		<meta charset="UTF-8">
+		<title>{% block title %}{% endblock %}</title>
+		<meta name="author" content="Wizard-G">
+		<link href="{{ base_url }}css/bootstrap.min.css" rel="stylesheet">
+		<!--
+		<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+		-->
+		<link href="{{ base_url }}css/style.css" rel="stylesheet">
+		{% block head %}
+		{% endblock %}
+	</head>
+	<body class="{{ body_class }}">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="brand" href="{{ base_url }}{{ lang }}">PaintStrap</a>
+					<ul class="nav">
+					    <li {{ macros.active("home", active_pages) }}><a href="{{ base_url }}{{ lang }}">Home</a></li>
+					    <li {{ macros.active("gallery", active_pages) }}><a href="{{ base_url }}{{ lang }}gallery/">Gallery</a></li>
+					</ul>
+					<ul class="nav pull-right">
+						<li {{ macros.active("en", active_pages) }}>
+							<a href="{{ base_url }}{{ this_url }}">English</a>
+						</li>
+						<li {{ macros.active("ja", active_pages) }}>
+							<a href="{{ base_url }}ja/{{ this_url }}">日本語</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			{% block heading %}
+			{% endblock %}
+			{% block content %}
+			{% endblock %}
+			<hr>
+			{% block footer %}
+			<div id="footer" class="row">
+				<div class="span4">
+					<p>
+					制作: <a rel="author" href="http://wizard-g.net" target="_blank">Wizard-G</a><br>
+					<a href="https://twitter.com/wiz_g" class="twitter-follow-button" data-show-count="false" data-lang="ja">@wiz_gさんをフォロー</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+					</p>
+					<p>
+					<a href="{{ base_url }}changelog/" target="_blank">更新履歴</a><br>
+					<a href="{{ base_url }}contact/" target="_blank">お問い合わせ</a><br>
+					<a href="http://wizard-g.net/blog/" target="_blank">ブログ</a><br>
+					</p>
+				</div>
+				<div class="span4">
+				<p>
+					本サイトは<a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>、<a href="http://kuler.adobe.com/api/" target="_blank">Adobe kuler API</a>、<a href="http://www.colourlovers.com/api" target="_blank">COLOURlovers API</a>を使用しています。
+				</p>
+				<p>Twitter Bootstrapのバージョン: v2.3.0</p>
+				<p><img src="{{ base_url }}img/ku_36pxWtext.png" style="width: 131px; height: 36px;" alt="colored by Adobe kuler">
+				</p>
+				</div>
+				<div class="span4">
+					{% include 'ja/footer_col3.html' %}
+				</div>
+			</div>
+			{% endblock %}
+			<div id="footer-link">
+			{% block footer_link %}
+				{% include 'ja/footer_link.html' %}
+			{% endblock %}
+			</div>
+		</div>
+
+		<div id="debug"></div>
+		
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-29680388-4']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+		</script>
+	</body>
+</html>

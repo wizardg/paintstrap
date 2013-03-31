@@ -1,0 +1,159 @@
+{% import "macros.html" as macros %}
+{% extends "ja/base.html" %}
+
+{% block title %}PaintStrap Gallery - 美しいカラーのTwitter Bootstrapテーマをダウンロード{% endblock %}
+
+{% block head %}
+	<meta name="description" content="「PaintStrap」で投稿された、Twitter Bootstrapのカラーテーマをダウンロードできるページ。テーマはAdobe kulerやCOLOURloversのカラースキームで美しく彩色されています。"> 
+	<link rel="canonical" href="http://paintstrap.com/ja/gallery/">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="{{ base_url }}css/gallery.css">
+	<script type="text/javascript" src="{{ base_url }}js/jquery.socialbutton-1.9.0.min.js"></script>
+	<script type="text/javascript" src="{{ base_url }}js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="{{ base_url }}js/common.js"></script>
+	<script type="text/javascript" src="{{ base_url }}js/gallery.js"></script>
+	<script type="text/javascript">
+	<!--
+	var BASE_URL = {{ base_url | json_encode | raw }};
+    var ERROR_MESSAGES = {
+        generate_error: "CSSファイルの生成でエラーが発生しました。"
+    };
+	//-->
+	</script>
+{% endblock %}
+
+{% block my_url %}gallery/{% endblock %}
+
+{% block heading %}
+	<div id="heading">
+		<h1>PaintStrap Gallery</h1>
+		<p>
+			美しいカラーのTwitter Bootstrapテーマをダウンロード
+		</p>
+		<div class="social-buttons">&nbsp;
+			<div id="facebook_like"></div>
+			<div id="twitter"></div>
+			<div id="google_plusone"></div>
+			<div id="hatena"></div>
+			<div id="github_star"><iframe src="http://ghbtns.com/github-btn.html?user=wizardg&repo=paintstrap&type=watch&count=false"
+	  allowtransparency="true" frameborder="0" scrolling="0" width="52" height="20"></iframe></div>
+			<div style="clear: both;"></div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<div class="row search-container">
+	    <form action="{{ base_url }}ja/gallery" method="get">
+	    <input type="hidden" name="page" value="{{ pagerfanta.getCurrentPage() }}">
+    		カラー：
+    		<select name="tag_names[]" class="search-by-color">
+    			<option value="">指定なし</option>
+                {{ macros.tag_name_option("白", "white", tag_names) }}
+                {{ macros.tag_name_option("黒", "black", tag_names) }}
+                {{ macros.tag_name_option("灰色", "gray", tag_names) }}
+                {{ macros.tag_name_option("赤", "red", tag_names) }}
+                {{ macros.tag_name_option("黄", "yellow", tag_names) }}
+                {{ macros.tag_name_option("黄緑", "yellow_green", tag_names) }}
+                {{ macros.tag_name_option("緑", "green", tag_names) }}
+                {{ macros.tag_name_option("水色", "aqua_blue", tag_names) }}
+                {{ macros.tag_name_option("青", "blue", tag_names) }}
+                {{ macros.tag_name_option("青紫", "violet", tag_names) }}
+                {{ macros.tag_name_option("紫", "purple", tag_names) }}
+    		</select>
+    		鮮やかさ：
+    		<select name="tag_names[]" class="search-by-saturation">
+    			<option value="">指定なし</option>
+                {{ macros.tag_name_option("高い", "high_saturation", tag_names) }}
+                {{ macros.tag_name_option("普通", "normal_saturation", tag_names) }}
+                {{ macros.tag_name_option("低い", "low_saturation", tag_names) }}
+    		</select>
+    		明るさ：
+    		<select name="tag_names[]" class="search-by-lightness">
+    			<option value="">指定なし</option>
+                {{ macros.tag_name_option("明るい", "high_lightness", tag_names) }}
+                {{ macros.tag_name_option("普通", "normal_lightness", tag_names) }}
+                {{ macros.tag_name_option("暗い", "low_lightness", tag_names) }}
+    		</select>
+    		<button type="submit" class="btn btn-primary">Search</button>
+        </form>
+	</div>
+	
+	<div class="page-info">
+	    <p>検索結果：{{ pagerfanta.getNbResults() }}件</p>
+	</div>
+	
+	{% if themes | length == 0 %}
+	   <p>指定された条件に合うテーマは見つかりませんでした。他の条件で検索してください。</p>
+	{% else %}
+		<div class="item">
+	        <ul class="row thumbnails">
+	            {% for theme in themes %}
+	            <li class="span3 theme-{{ theme.theme_id }}">
+	                <div class="thumbnail">
+	                    {% if theme.api_type == "kuler" %}
+	                        <p class="using-color-scheme-container">
+	                            <span class="kuler-icon">&nbsp;</span>
+	                            <a href="http://kuler.adobe.com/index.cfm#themeID/{{ theme.cs_id }}" target="_blank">kuler #{{ theme.cs_id }}</a>
+	                        </p>
+	                    {% elseif theme.api_type == "colourlovers" %}
+	                        <p class="using-color-scheme-container">
+	                            <span class="colourlovers-icon">&nbsp;</span>
+	                            <a href="http://www.colourlovers.com/palette/{{ theme.cs_id }}" target="_blank">COLOURlovers #{{ theme.cs_id }}</a>
+	                        </p>
+	                    {% endif %}
+	                    <img class="thumbnail-image" src="{{ theme._url_thumbnail }}" alt="">
+	                    <h4 class="theme-name">{{ theme.cs_name }}</h4>
+	                    <p>
+	                        登録日: {{ theme.created_at | date("Y/m/d") }}
+	                    </p>
+	                    <p><a href="{{ base_url }}preview_by_id/{{ theme.theme_id }}?design=hero" target="_blank">プレビュー</a> | <a id="download-link-{{ theme.theme_id }}" class="gallery-download-link" href="#download-dialog" role="button" data-toggle="modal">ダウンロード</a></p>
+	                </div>
+	            </li>
+	            {% if loop.index0 % 4 == 3 %}
+	            </ul>
+	            <ul class="row thumbnails">
+	            {% endif %}
+	            {% endfor %}
+	        </ul>
+	    </div>
+    {% endif %}
+    
+    {{ pager_html | raw }}
+    
+    <div id="explain" class="well">
+        PaintStrap Galleryでは、<a href="{{ base_url }}{{ lang }}">PaintStrap</a>で作成されたテーマを掲載しています。<br>
+        PaintStrapを使うと、美しいTwitter Bootstrapテーマを、Adobe kulerやCOLOURloversに投稿されているカラースキームを使って簡単に作成できます。<br>
+        <br>
+        テーマをご利用の際は、Twitter Bootstrapおよび使われているカラースキームのライセンスをご確認ください。<br>
+    </div>
+
+    <div id="download-dialog" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="download-dialog-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×
+            </button>
+            <h3 id="download-dialog-label">ダウンロード - <span id="download-dialog-theme-name"></span></h3>
+        </div>
+        <div class="modal-body">
+            <form id="download-dialog-form" action="" method="get">
+                <div id="download-dialog-generating">
+                    CSSファイルを生成しています。しばらくお待ちください... <img id="loading-image-preview" class="loading-image" src="{{ base_url }}img/ajax-loader.gif" alt="loading" class="hide">
+                </div>
+                <div id="download-dialog-ready" class="hide">
+                    <p>ボタンを押すとダウンロードを開始します。</p>
+                    <p>
+                        <button class="btn btn-primary">
+                            ダウンロード
+                        </button>
+                    </p>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">
+                閉じる
+            </button>
+        </div>
+    </div>
+{% endblock %}

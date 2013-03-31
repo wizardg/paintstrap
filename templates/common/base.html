@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="ja-JP">
+	<head>
+		<meta charset="UTF-8">
+		<title>{% block title %}{% endblock %}</title>
+		<meta name="author" content="Wizard-G">
+		<link href="{{ base_url }}css/bootstrap.min.css" rel="stylesheet">
+		<link href="{{ base_url }}css/style.css" rel="stylesheet">
+		{% block head %}
+		{% endblock %}
+	</head>
+	<body>
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="brand" href="{{ base_url }}">PaintStrap</a>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			{% block content %}
+			{% endblock %}
+			<hr>
+			{% block footer %}
+			{% endblock %}
+		</div>
+		
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-29680388-4']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+		</script>
+	</body>
+</html>

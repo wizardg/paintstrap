@@ -1,4 +1,15 @@
-RewriteEngine on
+Redirect permanent /index.html /
+Redirect permanent /index_ja.html /ja/
+Redirect permanent /preview.html /preview/
+Redirect permanent /contact.html /contact/
+Redirect permanent /changelog.html /changelog/
+Redirect permanent /api/call_color_scheme_api.php /api/get_color_scheme/
+Redirect permanent /api/package.php /api/package/
+
+
+RewriteEngine On
 RewriteBase /
 RewriteRule glyphicons-halflings\.png$ img/glyphicons-halflings.png
 RewriteRule glyphicons-halflings-white\.png$ img/glyphicons-halflings-white.png
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]

@@ -1,0 +1,88 @@
+body.gallery .search-container {
+	margin: 30px 0 0 0;
+	text-align: center;
+}
+
+body.gallery select {
+	margin: 0 10px 0 0;
+}
+
+body.gallery select.search-by-color {
+	width: 150px;
+}
+
+body.gallery select.search-by-saturation {
+	width: 100px;
+}
+
+body.gallery select.search-by-lightness {
+	width: 100px;
+}
+
+body.gallery .item {
+	text-align: center;
+}
+
+body.gallery .item img.thumbnail-image {
+	border: 1px solid #cccccc;
+}
+/*
+body.gallery .item .item-image img {
+	border: 1px solid #cccccc;
+	padding: 4px;
+}
+
+body.gallery .item table {
+	min-width: 140px;
+	margin: 0 auto;
+}
+
+body.gallery .item table th {
+	text-align: left;
+}
+
+body.gallery .item table td {
+	text-align: right;
+}
+*/
+
+body.gallery .item .using-color-scheme-container {
+	font-size: 80%;
+	margin-top: 4px;
+	margin-bottom: 8px;
+	line-height: 1em;
+	text-align: left;
+}
+
+body.gallery .item .using-color-scheme-container a {
+}
+
+body.gallery .item .using-color-scheme-container span {
+	width: 10px;
+	display: inline-block;
+}
+
+body.gallery .item span.kuler-icon {
+	background-color: #81CFF1;
+}
+
+body.gallery .item span.colourlovers-icon {
+	background-color: #5FA33E;
+}
+
+body.gallery .pagination {
+	text-align: center;
+}
+
+body.gallery .page-info {
+	text-align: right;
+}
+
+body.gallery #download-dialog .modal-body {
+	min-height: 80px;
+}
+
+body.gallery #explain {
+	margin-top: 30px;
+	font-size: 90%;
+}

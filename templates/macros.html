@@ -1,0 +1,7 @@
+{% macro tag_name_option(label, value, tag_names) %}
+    <option value="{{ value }}" {% if value in tag_names %}selected{% endif %}>{{ label }}</option>
+{% endmacro %}
+
+{% macro active(page, active_pages) %}
+{% if page in active_pages %}class="active"{% endif %}
+{% endmacro %}

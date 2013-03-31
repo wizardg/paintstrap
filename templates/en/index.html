@@ -1,0 +1,788 @@
+{% extends "en/base.html" %}
+
+{% block title %}PaintStrap - Generate Bootstrap themes using the color scheme{% endblock %}
+
+{% block head %}
+	<meta name="description" content="Coloring Twitter Bootstrap beautiful in Adobe kuler / COLOURlovers color scheme. You can generate CSS files by simply selecting the color theme and choosing colors corresponding to each element."> 
+	<link rel="canonical" href="http://paintstrap.com/">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+	<script type="text/javascript" src="{{ base_url }}js/jquery.socialbutton-1.9.0.min.js"></script>
+	<script type="text/javascript" src="{{ base_url }}js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="{{ base_url }}js/lr-pager.js"></script>
+	<script type="text/javascript" src="{{ base_url }}js/common.js"></script>
+	<script type="text/javascript" src="{{ base_url }}js/main.js"></script>
+	<script type="text/javascript">
+	<!--
+	var BASE_URL = {{ base_url | json_encode | raw }};
+	var ERROR_MESSAGES = {
+		required: "Please input this.",
+		invalid_input: "Invalid input.",
+		api_call_error: "API call error.",
+		color_scheme_not_exists: "An input theme does not exist or cannot use.",
+		generate_error: "CSS files generate error."
+	};
+	//-->
+	</script>
+{% endblock %}
+
+{% block heading %}
+    <div class="row">
+        <div class="span1"></div>
+        <div class="span10">
+            <div class="alert alert-info" style="margin-top: -20px;">
+                <i class="icon-arrow-up"></i>Gallery page added. Download Twitter Bootstrap themes that made by PaintStrap!
+            </div>
+        </div>
+        <div class="span1"></div>
+    </div>
+
+	<div id="heading">
+		<h1>PaintStrap</h1>
+		<p>
+			Generate beautiful Twitter Bootstrap themes using the Adobe kuler / COLOURlovers color scheme
+		</p>
+		<div class="social-buttons">&nbsp;
+			<div id="facebook_like"></div>
+			<div id="twitter"></div>
+			<div id="google_plusone"></div>
+			<div id="hatena"></div>
+			<div id="github_star"><iframe src="http://ghbtns.com/github-btn.html?user=wizardg&repo=paintstrap&type=watch&count=false"
+allowtransparency="true" frameborder="0" scrolling="0" width="52" height="20"></iframe></div>
+			<div style="clear: both;"></div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<ul class="steps">
+		<li id="steps-1">
+			<div>
+				Step 1: Input a color scheme
+			</div>
+		</li>
+		<li id="steps-2">
+			<div>
+				Step 2: Set colors
+			</div>
+		</li>
+		<li id="steps-3">
+			<div>
+				Step 3: Download CSS files
+			</div>
+		</li>
+	</ul>
+	<div id="input-kuler-container" class="page">
+		<h2>Step 1: Input a color scheme</h2>
+		<form id="input-kuler">
+			<div id="input-kuler-id-container" class="control-group">
+				<p>
+				<label><input type="radio" name="api_type" value="kuler" checked>Use an Adobe kuler color scheme(Color Theme)</label>
+				</p>
+				<p class="input-api-particular">
+				<!--
+				<span class="announce">
+					Now Adobe kuler API is in maintenance mode, so this can't work.
+				</span><br>
+				-->
+				Please input a theme ID or a permalink URL:<br>
+				<input id="input-kuler-id" class="input-id" type="text" name="kuler_id" value="">
+				<span id="input-kuler-id-error" class="help-inline"></span>
+				<br>
+				E.g. <a class="input-kuler-example" href="javascript:void(0);"><span class="example-no hide">1</span><span class="kuler-id">1084168</span></a>,&nbsp; <a class="input-kuler-example" href="javascript:void(0);"><span class="example-no hide">2</span><span class="kuler-id">1006374</span></a>,&nbsp; <a class="input-kuler-example" href="javascript:void(0);"><span class="example-no hide">3</span><span class="kuler-id">2043016</span></a>
+				</p>
+			</div>
+			<div id="input-colourlovers-id-container" class="control-group">
+				<p>
+					<label><input type="radio" name="api_type" value="colourlovers">Use a COLOURlovers color scheme(Palette)</label>
+				</p>
+				<p class="input-api-particular">
+				Please input a palette ID or a permalink URL:<br>
+				<input id="input-colourlovers-id" class="input-id" type="text" name="colourlovers_id" value="">
+				<span id="input-colourlovers-id-error" class="help-inline"></span>
+				<br>
+				E.g. <a class="input-colourlovers-example" href="javascript:void(0);"><span class="example-no hide">1</span><span class="colourlovers-id">694737</span></a>,&nbsp;
+					<a class="input-colourlovers-example" href="javascript:void(0);"><span class="example-no hide">2</span><span class="colourlovers-id">678929</span></a>,&nbsp;
+					<a class="input-colourlovers-example" href="javascript:void(0);"><span class="example-no hide">3</span><span class="colourlovers-id">77121</span></a>
+				</p>
+			</div>
+			<div class="buttons">
+				<span class="loading-image-spacer"></span>
+				<button id="forward-to-select-color-button" type="submit" class="btn btn-primary">
+					Next&nbsp;<i class="icon-arrow-right icon-white"></i>
+				</button>
+				<span class="loading-image-container"><img class="loading-image hide" src="img/ajax-loader.gif" alt="loading"></span>
+			</div>
+		</form>
+		<div id="input-kuler-explain" class="well">
+			<!--
+			<h5>Explain</h5>
+			-->
+			<div>
+				<ol>
+					<li>
+						Access to <a href="http://kuler.adobe.com/" target="_blank">Adobe kuler</a> or <a href="http://www.colourlovers.com/" target="_blank">COLOURlovers</a> web site and select a theme you like.
+						<!--
+						<br>
+						<button id="open-kuler" type="button" class="btn">Open Adobe kuler</button>&nbsp;
+						<button id="open-colourlovers" type="button" class="btn">Open COLOURlovers</button>
+						-->
+					</li>
+					<li>
+						Input it's theme ID or permalink URL(Please refer to a screen shot below).
+						<!--
+						<br>
+						* Please refer to a screen shot on the right.
+						-->
+						<p>
+							<img src="{{ base_url }}img/explain_kuler_id_2_200_133.png" style="width: 200px; height: 133px;" alt="Kuler ID explain">
+							<img src="{{ base_url }}img/explain_colourlovers_id_400_88.png" style="width: 400px; height: 88px;" alt="Kuler ID explain">
+						</p>
+					</li>
+				</ol>
+			</div>
+			<!--
+			<div class="pull-right">
+				<p><img src="img/explain_kuler_id_240.png" style="width: 240px; height: 160px;" alt="Kuler ID explain">
+				</p>
+			</div>
+			<div style="clear: both;"></div>
+			-->
+		</div>
+	</div>
+	<div id="select-color-container" class="page hide">
+		<h2>Step 2: Set colors</h2>
+		<div id="input-select-color-container">
+			<p>
+				Set colors corresponding to each elements.
+			</p>
+			<form id="selected-color-form">
+				<input type="hidden" name="api_type" value="">
+				<input type="hidden" name="id" value="">
+				<table id="selected-color-table" class="table table-bordered">
+					<tbody>
+						<tr>
+							<td>Text</td>
+							<td id="color-0" class="selected-color-item-td lr-pager">
+							<div class="selected-color-item-page pull-left">
+								<span id="color-0-0" class="selected-color-item">
+									<input type="radio" name="c[0]" value="111111" class="hide">
+								</span><span id="color-0-1" class="selected-color-item">
+									<input type="radio" name="c[0]" value="211111" class="hide">
+								</span><span id="color-0-2" class="selected-color-item">
+									<input type="radio" name="c[0]" value="311111" class="hide">
+								</span><span id="color-0-3" class="selected-color-item">
+									<input type="radio" name="c[0]" value="411111" class="hide">
+								</span><span id="color-0-4" class="selected-color-item">
+									<input type="radio" name="c[0]" value="511111" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-0-5" class="selected-color-item">
+									<input type="radio" name="c[0]" value="000000" class="hide">
+								</span>
+								<span id="color-0-6" class="selected-color-item">
+									<input type="radio" name="c[0]" value="111111" class="hide">
+								</span>
+								<span id="color-0-7" class="selected-color-item">
+									<input type="radio" name="c[0]" value="222222" class="hide">
+								</span>
+								<span id="color-0-8" class="selected-color-item">
+									<input type="radio" name="c[0]" value="333333" class="hide">
+								</span>
+								<span id="color-0-9" class="selected-color-item">
+									<input type="radio" name="c[0]" value="444444" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-0-10" class="selected-color-item">
+									<input type="radio" name="c[0]" value="555555" class="hide">
+								</span>
+								<span id="color-0-11" class="selected-color-item">
+									<input type="radio" name="c[0]" value="666666" class="hide">
+								</span>
+								<span id="color-0-12" class="selected-color-item">
+									<input type="radio" name="c[0]" value="777777" class="hide">
+								</span>
+								<span id="color-0-13" class="selected-color-item">
+									<input type="radio" name="c[0]" value="888888" class="hide">
+								</span>
+								<span id="color-0-14" class="selected-color-item">
+									<input type="radio" name="c[0]" value="999999" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-0-15" class="selected-color-item">
+									<input type="radio" name="c[0]" value="AAAAAA" class="hide">
+								</span>
+								<span id="color-0-16" class="selected-color-item">
+									<input type="radio" name="c[0]" value="BBBBBB" class="hide">
+								</span>
+								<span id="color-0-17" class="selected-color-item">
+									<input type="radio" name="c[0]" value="CCCCCC" class="hide">
+								</span>
+								<span id="color-0-18" class="selected-color-item">
+									<input type="radio" name="c[0]" value="DDDDDD" class="hide">
+								</span>
+								<span id="color-0-19" class="selected-color-item">
+									<input type="radio" name="c[0]" value="EEEEEE" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-0-20" class="selected-color-item">
+									<input type="radio" name="c[0]" value="FFFFFF" class="hide">
+								</span>
+							</div></td>
+						</tr>
+						<tr>
+							<td>Navigation background</td>
+							<td id="color-5" class="selected-color-item-td lr-pager">
+							<div class="selected-color-item-page pull-left">
+								<span id="color-5-0" class="selected-color-item">
+									<input type="radio" name="c[5]" value="111111" class="hide">
+								</span><span id="color-5-1" class="selected-color-item">
+									<input type="radio" name="c[5]" value="211111" class="hide">
+								</span><span id="color-5-2" class="selected-color-item">
+									<input type="radio" name="c[5]" value="311111" class="hide">
+								</span><span id="color-5-3" class="selected-color-item">
+									<input type="radio" name="c[5]" value="411111" class="hide">
+								</span><span id="color-5-4" class="selected-color-item">
+									<input type="radio" name="c[5]" value="511111" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-5-5" class="selected-color-item">
+									<input type="radio" name="c[5]" value="000000" class="hide">
+								</span>
+								<span id="color-5-6" class="selected-color-item">
+									<input type="radio" name="c[5]" value="111111" class="hide">
+								</span>
+								<span id="color-5-7" class="selected-color-item">
+									<input type="radio" name="c[5]" value="222222" class="hide">
+								</span>
+								<span id="color-5-8" class="selected-color-item">
+									<input type="radio" name="c[5]" value="333333" class="hide">
+								</span>
+								<span id="color-5-9" class="selected-color-item">
+									<input type="radio" name="c[5]" value="444444" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-5-10" class="selected-color-item">
+									<input type="radio" name="c[5]" value="555555" class="hide">
+								</span>
+								<span id="color-5-11" class="selected-color-item">
+									<input type="radio" name="c[5]" value="666666" class="hide">
+								</span>
+								<span id="color-5-12" class="selected-color-item">
+									<input type="radio" name="c[5]" value="777777" class="hide">
+								</span>
+								<span id="color-5-13" class="selected-color-item">
+									<input type="radio" name="c[5]" value="888888" class="hide">
+								</span>
+								<span id="color-5-14" class="selected-color-item">
+									<input type="radio" name="c[5]" value="999999" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-5-15" class="selected-color-item">
+									<input type="radio" name="c[5]" value="AAAAAA" class="hide">
+								</span>
+								<span id="color-5-16" class="selected-color-item">
+									<input type="radio" name="c[5]" value="BBBBBB" class="hide">
+								</span>
+								<span id="color-5-17" class="selected-color-item">
+									<input type="radio" name="c[5]" value="CCCCCC" class="hide">
+								</span>
+								<span id="color-5-18" class="selected-color-item">
+									<input type="radio" name="c[5]" value="DDDDDD" class="hide">
+								</span>
+								<span id="color-5-19" class="selected-color-item">
+									<input type="radio" name="c[5]" value="EEEEEE" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-5-20" class="selected-color-item">
+									<input type="radio" name="c[5]" value="FFFFFF" class="hide">
+								</span>
+							</div></td>
+						</tr>
+						<tr>
+							<td>Link text, Primary buttons</td>
+							<td id="color-1" class="selected-color-item-td lr-pager">
+							<div class="selected-color-item-page pull-left">
+								<span id="color-1-0" class="selected-color-item">
+									<input type="radio" name="c[1]" value="111111" class="hide">
+								</span><span id="color-1-1" class="selected-color-item">
+									<input type="radio" name="c[1]" value="211111" class="hide">
+								</span><span id="color-1-2" class="selected-color-item">
+									<input type="radio" name="c[1]" value="311111" class="hide">
+								</span><span id="color-1-3" class="selected-color-item">
+									<input type="radio" name="c[1]" value="411111" class="hide">
+								</span><span id="color-1-4" class="selected-color-item">
+									<input type="radio" name="c[1]" value="511111" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-1-5" class="selected-color-item">
+									<input type="radio" name="c[1]" value="000000" class="hide">
+								</span>
+								<span id="color-1-6" class="selected-color-item">
+									<input type="radio" name="c[1]" value="111111" class="hide">
+								</span>
+								<span id="color-1-7" class="selected-color-item">
+									<input type="radio" name="c[1]" value="222222" class="hide">
+								</span>
+								<span id="color-1-8" class="selected-color-item">
+									<input type="radio" name="c[1]" value="333333" class="hide">
+								</span>
+								<span id="color-1-9" class="selected-color-item">
+									<input type="radio" name="c[1]" value="444444" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-1-10" class="selected-color-item">
+									<input type="radio" name="c[1]" value="555555" class="hide">
+								</span>
+								<span id="color-1-11" class="selected-color-item">
+									<input type="radio" name="c[1]" value="666666" class="hide">
+								</span>
+								<span id="color-1-12" class="selected-color-item">
+									<input type="radio" name="c[1]" value="777777" class="hide">
+								</span>
+								<span id="color-1-13" class="selected-color-item">
+									<input type="radio" name="c[1]" value="888888" class="hide">
+								</span>
+								<span id="color-1-14" class="selected-color-item">
+									<input type="radio" name="c[1]" value="999999" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-1-15" class="selected-color-item">
+									<input type="radio" name="c[1]" value="AAAAAA" class="hide">
+								</span>
+								<span id="color-1-16" class="selected-color-item">
+									<input type="radio" name="c[1]" value="BBBBBB" class="hide">
+								</span>
+								<span id="color-1-17" class="selected-color-item">
+									<input type="radio" name="c[1]" value="CCCCCC" class="hide">
+								</span>
+								<span id="color-1-18" class="selected-color-item">
+									<input type="radio" name="c[1]" value="DDDDDD" class="hide">
+								</span>
+								<span id="color-1-19" class="selected-color-item">
+									<input type="radio" name="c[1]" value="EEEEEE" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-1-20" class="selected-color-item">
+									<input type="radio" name="c[1]" value="FFFFFF" class="hide">
+								</span>
+							</div></td>
+						</tr>
+						<tr>
+							<td>Navigation text</td>
+							<td id="color-2" class="selected-color-item-td lr-pager">
+							<div class="selected-color-item-page pull-left">
+								<span id="color-2-0" class="selected-color-item">
+									<input type="radio" name="c[2]" value="111111" class="hide">
+								</span><span id="color-2-1" class="selected-color-item">
+									<input type="radio" name="c[2]" value="211111" class="hide">
+								</span><span id="color-2-2" class="selected-color-item">
+									<input type="radio" name="c[2]" value="311111" class="hide">
+								</span><span id="color-2-3" class="selected-color-item">
+									<input type="radio" name="c[2]" value="411111" class="hide">
+								</span><span id="color-2-4" class="selected-color-item">
+									<input type="radio" name="c[2]" value="511111" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-2-5" class="selected-color-item">
+									<input type="radio" name="c[2]" value="000000" class="hide">
+								</span>
+								<span id="color-2-6" class="selected-color-item">
+									<input type="radio" name="c[2]" value="111111" class="hide">
+								</span>
+								<span id="color-2-7" class="selected-color-item">
+									<input type="radio" name="c[2]" value="222222" class="hide">
+								</span>
+								<span id="color-2-8" class="selected-color-item">
+									<input type="radio" name="c[2]" value="333333" class="hide">
+								</span>
+								<span id="color-2-9" class="selected-color-item">
+									<input type="radio" name="c[2]" value="444444" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-2-10" class="selected-color-item">
+									<input type="radio" name="c[2]" value="555555" class="hide">
+								</span>
+								<span id="color-2-11" class="selected-color-item">
+									<input type="radio" name="c[2]" value="666666" class="hide">
+								</span>
+								<span id="color-2-12" class="selected-color-item">
+									<input type="radio" name="c[2]" value="777777" class="hide">
+								</span>
+								<span id="color-2-13" class="selected-color-item">
+									<input type="radio" name="c[2]" value="888888" class="hide">
+								</span>
+								<span id="color-2-14" class="selected-color-item">
+									<input type="radio" name="c[2]" value="999999" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-2-15" class="selected-color-item">
+									<input type="radio" name="c[2]" value="AAAAAA" class="hide">
+								</span>
+								<span id="color-2-16" class="selected-color-item">
+									<input type="radio" name="c[2]" value="BBBBBB" class="hide">
+								</span>
+								<span id="color-2-17" class="selected-color-item">
+									<input type="radio" name="c[2]" value="CCCCCC" class="hide">
+								</span>
+								<span id="color-2-18" class="selected-color-item">
+									<input type="radio" name="c[2]" value="DDDDDD" class="hide">
+								</span>
+								<span id="color-2-19" class="selected-color-item">
+									<input type="radio" name="c[2]" value="EEEEEE" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-2-20" class="selected-color-item">
+									<input type="radio" name="c[2]" value="FFFFFF" class="hide">
+								</span>
+							</div></td>
+						</tr>
+						<tr>
+							<td>Input text</td>
+							<td id="color-6" class="selected-color-item-td lr-pager">
+							<div class="selected-color-item-page pull-left">
+								<span id="color-6-0" class="selected-color-item">
+									<input type="radio" name="c[6]" value="111111" class="hide">
+								</span><span id="color-6-1" class="selected-color-item">
+									<input type="radio" name="c[6]" value="211111" class="hide">
+								</span><span id="color-6-2" class="selected-color-item">
+									<input type="radio" name="c[6]" value="311111" class="hide">
+								</span><span id="color-6-3" class="selected-color-item">
+									<input type="radio" name="c[6]" value="411111" class="hide">
+								</span><span id="color-6-4" class="selected-color-item">
+									<input type="radio" name="c[6]" value="511111" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-6-5" class="selected-color-item">
+									<input type="radio" name="c[6]" value="000000" class="hide">
+								</span>
+								<span id="color-6-6" class="selected-color-item">
+									<input type="radio" name="c[6]" value="111111" class="hide">
+								</span>
+								<span id="color-6-7" class="selected-color-item">
+									<input type="radio" name="c[6]" value="222222" class="hide">
+								</span>
+								<span id="color-6-8" class="selected-color-item">
+									<input type="radio" name="c[6]" value="333333" class="hide">
+								</span>
+								<span id="color-6-9" class="selected-color-item">
+									<input type="radio" name="c[6]" value="444444" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-6-10" class="selected-color-item">
+									<input type="radio" name="c[6]" value="555555" class="hide">
+								</span>
+								<span id="color-6-11" class="selected-color-item">
+									<input type="radio" name="c[6]" value="666666" class="hide">
+								</span>
+								<span id="color-6-12" class="selected-color-item">
+									<input type="radio" name="c[6]" value="777777" class="hide">
+								</span>
+								<span id="color-6-13" class="selected-color-item">
+									<input type="radio" name="c[6]" value="888888" class="hide">
+								</span>
+								<span id="color-6-14" class="selected-color-item">
+									<input type="radio" name="c[6]" value="999999" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-6-15" class="selected-color-item">
+									<input type="radio" name="c[6]" value="AAAAAA" class="hide">
+								</span>
+								<span id="color-6-16" class="selected-color-item">
+									<input type="radio" name="c[6]" value="BBBBBB" class="hide">
+								</span>
+								<span id="color-6-17" class="selected-color-item">
+									<input type="radio" name="c[6]" value="CCCCCC" class="hide">
+								</span>
+								<span id="color-6-18" class="selected-color-item">
+									<input type="radio" name="c[6]" value="DDDDDD" class="hide">
+								</span>
+								<span id="color-6-19" class="selected-color-item">
+									<input type="radio" name="c[6]" value="EEEEEE" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-6-20" class="selected-color-item">
+									<input type="radio" name="c[6]" value="FFFFFF" class="hide">
+								</span>
+							</div></td>
+						</tr>
+						<tr>
+							<td>Hero unit background, hr tag</td>
+							<td id="color-3" class="selected-color-item-td lr-pager">
+							<div class="selected-color-item-page pull-left">
+								<span id="color-3-0" class="selected-color-item">
+									<input type="radio" name="c[3]" value="111111" class="hide">
+								</span><span id="color-3-1" class="selected-color-item">
+									<input type="radio" name="c[3]" value="211111" class="hide">
+								</span><span id="color-3-2" class="selected-color-item">
+									<input type="radio" name="c[3]" value="311111" class="hide">
+								</span><span id="color-3-3" class="selected-color-item">
+									<input type="radio" name="c[3]" value="411111" class="hide">
+								</span><span id="color-3-4" class="selected-color-item">
+									<input type="radio" name="c[3]" value="511111" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-3-5" class="selected-color-item">
+									<input type="radio" name="c[3]" value="000000" class="hide">
+								</span>
+								<span id="color-3-6" class="selected-color-item">
+									<input type="radio" name="c[3]" value="111111" class="hide">
+								</span>
+								<span id="color-3-7" class="selected-color-item">
+									<input type="radio" name="c[3]" value="222222" class="hide">
+								</span>
+								<span id="color-3-8" class="selected-color-item">
+									<input type="radio" name="c[3]" value="333333" class="hide">
+								</span>
+								<span id="color-3-9" class="selected-color-item">
+									<input type="radio" name="c[3]" value="444444" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-3-10" class="selected-color-item">
+									<input type="radio" name="c[3]" value="555555" class="hide">
+								</span>
+								<span id="color-3-11" class="selected-color-item">
+									<input type="radio" name="c[3]" value="666666" class="hide">
+								</span>
+								<span id="color-3-12" class="selected-color-item">
+									<input type="radio" name="c[3]" value="777777" class="hide">
+								</span>
+								<span id="color-3-13" class="selected-color-item">
+									<input type="radio" name="c[3]" value="888888" class="hide">
+								</span>
+								<span id="color-3-14" class="selected-color-item">
+									<input type="radio" name="c[3]" value="999999" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-3-15" class="selected-color-item">
+									<input type="radio" name="c[3]" value="AAAAAA" class="hide">
+								</span>
+								<span id="color-3-16" class="selected-color-item">
+									<input type="radio" name="c[3]" value="BBBBBB" class="hide">
+								</span>
+								<span id="color-3-17" class="selected-color-item">
+									<input type="radio" name="c[3]" value="CCCCCC" class="hide">
+								</span>
+								<span id="color-3-18" class="selected-color-item">
+									<input type="radio" name="c[3]" value="DDDDDD" class="hide">
+								</span>
+								<span id="color-3-19" class="selected-color-item">
+									<input type="radio" name="c[3]" value="EEEEEE" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-3-20" class="selected-color-item">
+									<input type="radio" name="c[3]" value="FFFFFF" class="hide">
+								</span>
+							</div></td>
+						</tr>
+						<tr>
+							<td>Page background</td>
+							<td id="color-4" class="selected-color-item-td lr-pager">
+							<div class="selected-color-item-page pull-left">
+								<span id="color-4-0" class="selected-color-item">
+									<input type="radio" name="c[4]" value="111111" class="hide">
+								</span><span id="color-4-1" class="selected-color-item">
+									<input type="radio" name="c[4]" value="211111" class="hide">
+								</span><span id="color-4-2" class="selected-color-item">
+									<input type="radio" name="c[4]" value="311111" class="hide">
+								</span><span id="color-4-3" class="selected-color-item">
+									<input type="radio" name="c[4]" value="411111" class="hide">
+								</span><span id="color-4-4" class="selected-color-item">
+									<input type="radio" name="c[4]" value="511111" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-4-5" class="selected-color-item">
+									<input type="radio" name="c[4]" value="000000" class="hide">
+								</span>
+								<span id="color-4-6" class="selected-color-item">
+									<input type="radio" name="c[4]" value="111111" class="hide">
+								</span>
+								<span id="color-4-7" class="selected-color-item">
+									<input type="radio" name="c[4]" value="222222" class="hide">
+								</span>
+								<span id="color-4-8" class="selected-color-item">
+									<input type="radio" name="c[4]" value="333333" class="hide">
+								</span>
+								<span id="color-4-9" class="selected-color-item">
+									<input type="radio" name="c[4]" value="444444" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-4-10" class="selected-color-item">
+									<input type="radio" name="c[4]" value="555555" class="hide">
+								</span>
+								<span id="color-4-11" class="selected-color-item">
+									<input type="radio" name="c[4]" value="666666" class="hide">
+								</span>
+								<span id="color-4-12" class="selected-color-item">
+									<input type="radio" name="c[4]" value="777777" class="hide">
+								</span>
+								<span id="color-4-13" class="selected-color-item">
+									<input type="radio" name="c[4]" value="888888" class="hide">
+								</span>
+								<span id="color-4-14" class="selected-color-item">
+									<input type="radio" name="c[4]" value="999999" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-4-15" class="selected-color-item">
+									<input type="radio" name="c[4]" value="AAAAAA" class="hide">
+								</span>
+								<span id="color-4-16" class="selected-color-item">
+									<input type="radio" name="c[4]" value="BBBBBB" class="hide">
+								</span>
+								<span id="color-4-17" class="selected-color-item">
+									<input type="radio" name="c[4]" value="CCCCCC" class="hide">
+								</span>
+								<span id="color-4-18" class="selected-color-item">
+									<input type="radio" name="c[4]" value="DDDDDD" class="hide">
+								</span>
+								<span id="color-4-19" class="selected-color-item">
+									<input type="radio" name="c[4]" value="EEEEEE" class="hide">
+								</span>
+							</div>
+							<div class="selected-color-item-page pull-left">
+								<span id="color-4-20" class="selected-color-item">
+									<input type="radio" name="c[4]" value="FFFFFF" class="hide">
+								</span>
+							</div></td>
+						</tr>
+					</tbody>
+				</table>
+    			<div class="share-container">
+    			    <p>
+    			        <label><span class="share-checkbox-container"><input type="checkbox" name="share" value="1" checked></span>Submit to PaintStrap Gallery</label>
+    			    </p>
+    			    <p class="gallery-explain">You can share the theme when you submit it to <a href="{{ base_url }}gallery" target="_blank">PaintStrap Gallery</a>.</p>
+    			</div>
+			</form>
+		</div>
+		<div id="preview-container">
+			<div>
+				<div class="pull-left">
+					<p>
+						Preview<span class="open-large-preview-container"><a id="open-large-preview" href="javascript:void(0);">Open the large preview</a></span>
+					</p>
+				</div>
+				<div class="pull-right">
+					<img id="loading-image-preview" class="loading-image" src="{{ base_url }}img/ajax-loader.gif" alt="loading" class="hide">
+				</div>
+			</div>
+			<div id="preview-iframe-container">
+			</div>
+			<div id="selecting-kuler-theme-container">
+				<p>
+					<span id="theme-url"><a href="#" target="_blank"><span id="theme-name"></span></a></span><br>
+					ID: <span id="theme-id"></span> / Artist: <span id="theme-artist"></span><br>
+					Hex: <span id="theme-hex"></span>
+				</p>
+			</div>
+		</div>
+		<div class="buttons">
+			<span class="loading-image-spacer"></span>
+			<button id="back-to-input-kuler-button" type="button" class="btn">
+				<i class="icon-arrow-left"></i>&nbsp;Prev
+			</button>
+			<button id="forward-to-download-button" type="button" class="btn btn-primary">
+				Generate CSS!&nbsp;<i class="icon-arrow-right icon-white"></i>
+			</button>
+			<span class="loading-image-container"><img class="loading-image hide" src="{{ base_url }}img/ajax-loader.gif" alt="loading"></span>
+		</div>
+	</div>
+	<div id="download-container" class="page hide">
+		<h2>Step 3: Download CSS files</h2>
+		<p>
+			Generating CSS files is completed!<br>
+			Download and use it.
+		</p>
+		<h5>Download ZIP</h5>
+		<p>
+			<a id="download-zip" href="#" class="download-link-zip"></a>
+		</p>
+		<div id="download-list-left" class="pull-left">
+			<h5>Download each file</h5>
+			<p>
+				<a id="download-bootstrap-css" href="#" target="_blank" class="download-link">bootstrap.css</a>
+			</p>
+			<p>
+				<a id="download-bootstrap-min-css" href="#" target="_blank" class="download-link">bootstrap.min.css</a>
+			</p>
+			<p>
+				<a id="download-bootstrap-responsive-css" href="#" target="_blank" class="download-link">bootstrap-responsive.css</a>
+			</p>
+			<p>
+				<a id="download-bootstrap-responsive-min-css" href="#" target="_blank" class="download-link">bootstrap-responsive.min.css</a>
+			</p>
+			<p>
+				<a id="download-variables-less" href="#" target="_blank" class="download-link">variables.less</a>
+			</p>
+		</div>
+		<div id="download-list-right" class="pull-left">
+			<h5>Theme for Kickstrap</h5>
+			<p>
+				<a id="download-zip-kickstrap" href="#" class="download-link"></a>
+			</p>
+			<p class="download-explain">
+				How to use this: <br>
+				1. Unzip the archive.<br>
+				2. Copy the contents to Kickstrap "themes" directory.<br>
+				3. In "theme.less", import this theme.<br>
+				(Please refer to <a href="http://getkickstrap.com/docs/" target="_blank">Kickstrap Documentation</a>)
+			</p>
+		</div>
+		<div class="buttons">
+			<button id="back-to-select-color-button" type="button" class="btn">
+				<i class="icon-arrow-left"></i>&nbsp;Prev
+			</button>
+		</div>
+	</div>
+	<div id="descriptions" class="row">
+		<div class="span4">
+			<h3>Color sense is unnecessary</h3>
+			<p>
+				You can paint Twitter Bootstrap in great color schemes which is posted to Adobe kuler / COLOURlovers. It is not necessary for yourself to make colors.
+			</p>
+		</div>
+		<div class="span4">
+			<h3>Easy to install</h3>
+			<p>
+				It is very simple to install to your site. Download generated CSS files and replace it with a standard one. It is also usable as a theme of <a href="http://getkickstrap.com/" target="_blank">Kickstrap</a>.
+			</p>
+		</div>
+		<div class="span4">
+			<h3>Share your theme</h3>
+			<p>
+				Let's share your theme in <a href="{{ base_url }}gallery/">PaintStrap Gallery</a>. Other users become able to download the cool theme that you made. 
+			</p>
+		</div>
+	</div>
+	<div id="example-screenshots">
+		<img src="{{ base_url }}img/example_blue_sky_160.png" style="width: 160px; height: 160px;" alt="example1">
+		<img src="{{ base_url }}img/example_iphone_blue_160.png" style="width: 160px; height: 160px;" alt="example2">
+		<img src="{{ base_url }}img/example_mai_160.png" style="width: 160px; height: 160px;" alt="example3">
+	</div>
+{% endblock %}
