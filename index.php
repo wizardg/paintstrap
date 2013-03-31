@@ -244,8 +244,8 @@ function gallery($app, $lang) {
 	}
 	
 	$pagerfanta_view = new TwitterBootstrapView();
-	$pager_html = $pagerfanta_view->render($pagerfanta, function($page) {
-		return BASE_URL . "gallery?page=" . $page;
+	$pager_html = $pagerfanta_view->render($pagerfanta, function($page) use ($lang) {
+		return BASE_URL . get_lang_url_dir($lang) . "gallery?page=" . $page;
 	});
 	
 	$app->render($lang . "/gallery.html", array(
