@@ -3,6 +3,8 @@ $(function() {
 });
 
 function initSocialButtons() {
+	var language = window.navigator.userLanguage || window.navigator.language;
+
 	$('#hatena').socialbutton('hatena', {
 		button: 'simple'
 	});
@@ -10,6 +12,7 @@ function initSocialButtons() {
 	$('#twitter').socialbutton('twitter', {
 		button: 'none',
 		text: 'PaintStrap',
+		lang: language.substr(0, 2),
 		via: 'wiz_g'
 	});
 
