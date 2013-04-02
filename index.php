@@ -1,6 +1,8 @@
 <?php
 require_once(dirname(__FILE__) . "/common.inc.php");
 
+define("GALLERY_MAX_PER_PAGE", 20);
+
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\View\TwitterBootstrapView;
@@ -227,7 +229,7 @@ function gallery($app, $lang) {
 	
 	$adapter = new ArrayAdapter($array);
 	$pagerfanta = new Pagerfanta($adapter);
-	$pagerfanta->setMaxPerPage(12);
+	$pagerfanta->setMaxPerPage(GALLERY_MAX_PER_PAGE);
 	try {
 		$pagerfanta->setCurrentPage($page);
 
