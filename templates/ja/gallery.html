@@ -45,7 +45,6 @@
 {% block content %}
 	<div class="row search-container">
 	    <form action="{{ base_url }}ja/gallery" method="get">
-	    <input type="hidden" name="page" value="{{ pagerfanta.getCurrentPage() }}">
     		カラー：
     		<select name="tag_names[]" class="search-by-color">
     			<option value="">指定なし</option>
@@ -80,7 +79,7 @@
 	</div>
 	
 	<div class="page-info">
-	    <p>検索結果：{{ pagerfanta.getNbResults() }}件</p>
+	    <p>検索結果：{{ pagerfanta.getNbResults() }}件、{{ pagerfanta.getCurrentPage() }} / {{ pagerfanta.getNbPages() }}ページ</p>
 	</div>
 	
 	{% if themes | length == 0 %}

@@ -246,8 +246,15 @@ function gallery($app, $lang) {
 	}
 	
 	$pagerfanta_view = new TwitterBootstrapView();
-	$pager_html = $pagerfanta_view->render($pagerfanta, function($page) use ($lang) {
-		return BASE_URL . get_lang_url_dir($lang) . "gallery?page=" . $page;
+	$pager_html = $pagerfanta_view->render($pagerfanta, function($page) use ($app, $lang) {
+		$params = array(
+			"page" => $page
+		);
+		$tag_names = $app->request()->params("tag_names");
+		if (count($tag_names) > 0) {
+			$params["tag_names"] = $tag_names;
+		}
+		return BASE_URL . get_lang_url_dir($lang) . "gallery?" . http_build_query($params);
 	});
 	
 	$app->render($lang . "/gallery.html", array(

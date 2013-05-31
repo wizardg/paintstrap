@@ -45,7 +45,6 @@
 {% block content %}
 	<div class="row search-container">
 	    <form action="{{ base_url }}gallery" method="get">
-	    <input type="hidden" name="page" value="{{ pagerfanta.getCurrentPage() }}">
     		Color:
     		<select name="tag_names[]" class="search-by-color">
     			<option value="">All</option>
@@ -80,7 +79,10 @@
 	</div>
 	
 	<div class="page-info">
-	    <p>Found {{ pagerfanta.getNbResults() }} themes</p>
+	    <p>
+	    	Found {{ pagerfanta.getNbResults() }} themes, {{ pagerfanta.getCurrentPage() }} / {{ pagerfanta.getNbPages() }}
+	    	{% if pagerfanta.getNbPages() >= 2 %}Pages{% else %}Page{% endif %}
+	    </p>
 	</div>
 	
 	{% if themes | length == 0 %}
