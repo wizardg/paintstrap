@@ -2,83 +2,111 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Bootstrap, from Twitter</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
 		<meta name="robots" content="noindex,nofollow">
+        <link rel="shortcut icon" href="assets/ico/favicon.png">
 
-		<!-- Le styles -->
+        <title>Starter Template for Bootstrap</title>
+
+        <!-- Bootstrap core CSS -->
 		<link rel="stylesheet" type="text/css" href="{{ url_bootstrap_min_css }}">
-		<style>
-		body {
-		padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-		}
-		</style>
-        <link rel="stylesheet" type="text/css" href="{{ url_bootstrap_responsive_min_css }}">
-        <link rel="stylesheet" type="text/css" href="{{ base_url }}css/preview.css">
 
-		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="assets/js/html5shiv.js"></script>
+        <script src="assets/js/respond.min.js"></script>
 		<![endif]-->
+		
+		<style>
+            body {
+                padding-top: 50px;
+            }
+            
+            .jumbotron {
+                padding: 15px 0 !important;
+                margin-bottom: 10px;
+            }
+            
+            .jumbotron h1 {
+                font-size: 28px;
+                margin: 10px 0px;
+            }
 
-		<!-- Le fav and touch icons -->
-		<!--
-		<link rel="shortcut icon" href="../assets/ico/favicon.ico">
-		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-		-->
-		<!--
-		<script src="js/less-1.3.0.min.js" type="text/javascript"></script>
-		-->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-		<script src="{{ base_url }}js/bootstrap.js"></script>
-
-		<script type="text/javascript">
-		<!--
-			parent.postPreviewLoad();
-		//-->
-		</script>
+            hr {
+                margin-top: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .well {
+                margin-bottom: 15px;
+            }
+		</style>
 	</head>
 
 	<body>
 
-		<div class="navbar navbar-fixed-top">
-			<div class="navbar-inner">
+        <div class="navbar navbar-inverse navbar-fixed-top">
 				<div class="container">
-					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
-					<a class="brand" href="javascript:void(0);" onclick="return false;">Navigation</a>
-					<div class="nav-collapse collapse">
-						<ul class="nav">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="javascript:void(0);" onclick="return false;">Navigation</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
 							<li class="active">
 								<a href="javascript:void(0);" onclick="return false;">Home</a>
 							</li>
-							<!--
-							<li><a href="javascript:void(0);" onclick="return false;">About</a></li>
-							<li><a href="javascript:void(0);" onclick="return false;">Contact</a></li>
-							-->
+                        <li>
+                            <a href="javascript:void(0);" onclick="return false;">About</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" onclick="return false;">Contact</a>
+                        </li>
 						</ul>
 					</div><!--/.nav-collapse -->
 				</div>
 			</div>
+
+        <div class="jumbotron">
+            <div class="container">
+                <h1>Jumbotron</h1>
+            </div>
 		</div>
 
 		<div class="container">
-			<div class="hero-unit">
-				<h1>Hero Unit</h1>
+            <p>
+                Text text text. <a href="javascript:void(0);" onclick="return false;">Link</a>
+            </p>
+
+            <div class="well well-sm">
+                This is Well. <a href="javascript:void(0);" onclick="return false;">Link</a>
 			</div>
 
-			<p>Text text text, <a href="javascript:void(0);" onclick="return false;">Link</a></p>
+            <p>
+                <button type="submit" class="btn btn-primary">
+                    Button
+                </button>
+            </p>
 
 			<hr>
 
-			<form onsubmit="return false;">
+            <footer>
 				<p>
-					<input type="text" name="input1" value="Input:text" style="margin-bottom: 0; width: 150px;">
+                    &copy; Company 2013
 				</p>
-			</form>
-		</div>
-		<!-- /container -->
+            </footer>
+        </div><!-- /.container -->
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="assets/js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
 	</body>
 </html>

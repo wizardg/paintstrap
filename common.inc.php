@@ -32,9 +32,30 @@ require_once("snappy/autoload.php");
 
 define("COLOR_INPUT_NUM", 7);
 
-define("OUTPUT_VERSION", "5");
+define("OUTPUT_VERSION", "6");
+define("BOOTSTRAP_VERSION", "3.0.0");
 
-$GLOBALS["valid_preview_designs"] = array("default", "hero", "thumbnail");
+$GLOBALS["valid_preview_designs"] = array(
+	"default" => "preview-default.html",
+	"hero" => "preview-hero.html",
+	"thumbnail" => "preview-thumbnail.html",
+	"carousel" => "carousel/index.html",
+	"grid" => "grid/index.html",
+	"jumbotron" => "jumbotron/index.html",
+	"jumbotron-narrow" => "jumbotron-narrow/index.html",
+	"justified-nav" => "justified-nav/index.html",
+	"navbar" => "navbar/index.html",
+	"navbar-fixed-top" => "navbar-fixed-top/index.html",
+	"navbar-static-top" => "navbar-static-top/index.html",
+	"non-responsive" => "non-responsive/index.html",
+	"offcanvas" => "offcanvas/index.html",
+	"screenshots" => "screenshots/index.html",
+	"signin" => "signin/index.html",
+	"starter-template" => "starter-template/index.html",
+	"sticky-footer" => "sticky-footer/index.html",
+	"sticky-footer-navbar" => "sticky-footer-navbar/index.html"
+	//"theme" => "theme/index.html"
+);
 
 $GLOBALS["api_type_list"] = array(
 	"kuler" => array(
@@ -156,10 +177,7 @@ function generate($api_type, $id, $c, $preview = false) {
 	
 	$path_bootstrap_css = $path_output . "bootstrap.css";
 	$path_bootstrap_min_css = $path_output . "bootstrap.min.css";
-	$path_bootstrap_responsive_css = $path_output . "bootstrap-responsive.css";
-	$path_bootstrap_responsive_min_css = $path_output . "bootstrap-responsive.min.css";
 	$path_bootstrap_less = $path_output . "bootstrap.less";
-	$path_bootstrap_responsive_less = $path_output . "bootstrap-responsive.less";
 	$path_variables_less = $path_output . "variables.less";
 	$path_zip = $path_output . "paintstrap-" . $api_type . "-" . $id . "-" . $path_parts_md5_8 . ".zip";
 	$path_zip_kickstrap = $path_output . "paintstrap-k-" . $api_type . "-" . $id . "-" . $path_parts_md5_8 . ".zip";
@@ -168,16 +186,13 @@ function generate($api_type, $id, $c, $preview = false) {
 	
 	$url_bootstrap_css = $url_output . "bootstrap.css";
 	$url_bootstrap_min_css = $url_output . "bootstrap.min.css";
-	$url_bootstrap_responsive_css = $url_output . "bootstrap-responsive.css";
-	$url_bootstrap_responsive_min_css = $url_output . "bootstrap-responsive.min.css";
 	$url_variables_less = $url_output . "variables.less";
 	$url_zip = $url_output . basename($path_zip);
 	$url_zip_kickstrap = $url_output . basename($path_zip_kickstrap);
 	
 	if (!USE_LESSC_CACHE || 
 			!file_exists($path_bootstrap_min_css) ||
-			!file_exists($path_bootstrap_less) ||
-			!file_exists($path_bootstrap_responsive_less)) 
+			!file_exists($path_bootstrap_less))
 	{
 		if (!file_exists(dirname($path_bootstrap_less))) {
 			mkdir(dirname($path_bootstrap_less), 0777, true);
@@ -191,22 +206,10 @@ function generate($api_type, $id, $c, $preview = false) {
 		$bootstrap_less = ob_get_clean();
 		file_put_contents($path_bootstrap_less, $bootstrap_less);
 
-		ob_start();
-		require(dirname(__FILE__) . "/less/responsive.less");
-		$bootstrap_responsive_less = ob_get_clean();
-		file_put_contents($path_bootstrap_responsive_less, $bootstrap_responsive_less);
-
 		$command = sprintf(COMMAND_LESSC_COMPRESS, escapeshellarg($path_bootstrap_less), escapeshellarg($path_bootstrap_min_css));
 		$command = fix_directory_separater($command);
 		$output = array();
 		exec($command, $output);
-		
-		/*
-		$command = sprintf(COMMAND_LESSC_COMPRESS, escapeshellarg($path_bootstrap_responsive_less), escapeshellarg($path_bootstrap_responsive_min_css));
-		$command = fix_directory_separater($command);
-		$output = array();
-		exec($command, $output);
-		*/
 	}
 		
 	if (!$preview) {
@@ -217,35 +220,21 @@ function generate($api_type, $id, $c, $preview = false) {
 		if (!USE_LESSC_CACHE || 
 				!file_exists($path_variables_less) ||
 				!file_exists($path_bootstrap_css) ||
-				!file_exists($path_bootstrap_responsive_css) || 
-				!file_exists($path_bootstrap_responsive_min_css) ||
 				!file_exists($path_zip) ||
 				!file_exists($path_zip_kickstrap))
 		{
 			file_put_contents($path_variables_less, $variables_less);
-
-			$command = sprintf(COMMAND_LESSC_COMPRESS, escapeshellarg($path_bootstrap_responsive_less), escapeshellarg($path_bootstrap_responsive_min_css));
-			$command = fix_directory_separater($command);
-			$output = array();
-			exec($command, $output);
 
 			$command = sprintf(COMMAND_LESSC, escapeshellarg($path_bootstrap_less), escapeshellarg($path_bootstrap_css));
 			$command = fix_directory_separater($command);
 			$output = array();
 			exec($command, $output);
 
-			$command = sprintf(COMMAND_LESSC, escapeshellarg($path_bootstrap_responsive_less), escapeshellarg($path_bootstrap_responsive_css));
-			$command = fix_directory_separater($command);
-			$output = array();
-			exec($command, $output);
-			
 			$command = sprintf(COMMAND_ZIP, 
 				escapeshellarg(basename($path_zip)), 
 				implode(" ", array(
 					escapeshellarg(basename($path_bootstrap_css)), 
 					escapeshellarg(basename($path_bootstrap_min_css)), 
-					escapeshellarg(basename($path_bootstrap_responsive_css)), 
-					escapeshellarg(basename($path_bootstrap_responsive_min_css)), 
 					escapeshellarg(basename($path_variables_less))
 				))
 			);
@@ -271,8 +260,6 @@ function generate($api_type, $id, $c, $preview = false) {
 	$ret = array(
 		"url_bootstrap_css" => $url_bootstrap_css,
 		"url_bootstrap_min_css" => $url_bootstrap_min_css,
-		"url_bootstrap_responsive_css" => $url_bootstrap_responsive_css,
-		"url_bootstrap_responsive_min_css" => $url_bootstrap_responsive_min_css,
 		"url_variables_less" => $url_variables_less,
 		"url_zip" => $url_zip,
 		"url_zip_kickstrap" => $url_zip_kickstrap,

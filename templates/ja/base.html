@@ -10,38 +10,76 @@
 		<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 		-->
 		<link href="{{ base_url }}css/style.css" rel="stylesheet">
-		{% block head %}
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="../../assets/js/html5shiv.js"></script>
+          <script src="../../assets/js/respond.min.js"></script>
+        <![endif]-->
+
+   		{% block head %}
 		{% endblock %}
 	</head>
 	<body class="{{ body_class }}">
-		<div class="navbar">
-			<div class="navbar-inner">
-				<div class="container">
-					<a class="brand" href="{{ base_url }}{{ lang }}">PaintStrap</a>
-					<ul class="nav">
-					    <li {{ macros.active("home", active_pages) }}><a href="{{ base_url }}{{ lang }}">Home</a></li>
-					    <li {{ macros.active("gallery", active_pages) }}><a href="{{ base_url }}{{ lang }}gallery/">Gallery</a></li>
-					</ul>
-					<ul class="nav pull-right">
-						<li {{ macros.active("en", active_pages) }}>
-							<a href="{{ base_url }}{{ this_url }}">English</a>
-						</li>
-						<li {{ macros.active("ja", active_pages) }}>
-							<a href="{{ base_url }}ja/{{ this_url }}">日本語</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ base_url }}{{ lang }}">PaintStrap</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li {{ macros.active("home", active_pages) }}>
+                            <a href="{{ base_url }}{{ lang }}">Home</a>
+                        </li>
+                        <li {{ macros.active("gallery", active_pages) }}>
+                            <a href="{{ base_url }}{{ lang }}gallery/">Gallery</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li class="github-icon">
+                            <iframe src="http://ghbtns.com/github-btn.html?user=wizardg&repo=paintstrap&type=watch&count=false"
+                            allowtransparency="true" frameborder="0" scrolling="0" width="52" height="20"></iframe>
+                        </li>
+                        <li>
+<div class="ninja_onebutton">
+<script type="text/javascript">
+//<![CDATA[
+(function(d){
+if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_2e1da2a599ecba6fa5456222f09e5f75)=='undefined'){
+    document.write("<sc"+"ript type='text\/javascript' src='http:\/\/omt.shinobi.jp\/b\/2e1da2a599ecba6fa5456222f09e5f75'><\/sc"+"ript>");
+}else{
+    window.NINJA_CO_JP_ONETAG_BUTTON_2e1da2a599ecba6fa5456222f09e5f75.ONETAGButton_Load();}
+})(document);
+//]]>
+</script><span class="ninja_onebutton_hidden" style="display:none;"></span><span style="display:none;" class="ninja_onebutton_hidden"></span>
+</div>
+</li>
+                    </ul>
+                    <ul class="nav navbar-nav pull-right">
+                        <li {{ macros.active("en", active_pages) }}>
+                            <a href="{{ base_url }}{{ this_url }}">English</a>
+                        </li>
+                        <li {{ macros.active("ja", active_pages) }}>
+                            <a href="{{ base_url }}ja/{{ this_url }}">日本語</a>
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+        {% block heading %}
+        {% endblock %}
 		<div class="container">
-			{% block heading %}
-			{% endblock %}
 			{% block content %}
 			{% endblock %}
 			<hr>
 			{% block footer %}
 			<div id="footer" class="row">
-				<div class="span4">
+				<div class="col-md-4">
 					<p>
 					制作: <a rel="author" href="http://wizard-g.net" target="_blank">Wizard-G</a><br>
 					<a href="https://twitter.com/wiz_g" class="twitter-follow-button" data-show-count="false" data-lang="ja">@wiz_gさんをフォロー</a>
@@ -53,15 +91,15 @@
 					<a href="http://wizard-g.net/blog/" target="_blank">ブログ</a><br>
 					</p>
 				</div>
-				<div class="span4">
+				<div class="col-md-4">
 				<p>
 					本サイトは<a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>、<a href="http://kuler.adobe.com/api/" target="_blank">Adobe kuler API</a>、<a href="http://www.colourlovers.com/api" target="_blank">COLOURlovers API</a>を使用しています。
 				</p>
-				<p>Twitter Bootstrapのバージョン: v2.3.0</p>
+				<p>Twitter Bootstrapのバージョン: v{{ bootstrap_version }}</p>
 				<p><img src="{{ base_url }}img/ku_36pxWtext.png" style="width: 131px; height: 36px;" alt="colored by Adobe kuler">
 				</p>
 				</div>
-				<div class="span4">
+				<div class="col-md-4">
 					{% include 'ja/footer_col3.html' %}
 				</div>
 			</div>

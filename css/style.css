@@ -1,6 +1,6 @@
 h2 {
-	font-size: 16px;
-	margin: 2px 0px;
+	font-size: 20px;
+	padding: 20px 0 10px;
 }
 
 h3 {
@@ -15,12 +15,16 @@ input {
 	color: #555555 !important;
 }
 
-.hero-unit {
-	text-align: center;
+body {
+	padding-top: 40px;
+	padding-bottom: 20px;
 }
 
-.hero-unit h1 {
-	margin-bottom: 15px;
+.navbar {
+}
+
+.jumbotron h1 {
+	
 }
 
 div#heading {
@@ -84,11 +88,13 @@ div#heading h1 {
 
 .page {
 	border-left: 1px solid #dddddd;
-	border-right: 1px solid #dddddd;
 	border-bottom: 1px solid #dddddd;
+	border-right: 1px solid #dddddd;
 	border-radius: 4px;
-	padding: 10px;
+	padding: 0 10px 10px 10px;
 	height: 620px;
+	width: 970px;
+	margin: 0 auto;
 }
 
 div.social-buttons {
@@ -98,6 +104,16 @@ div.social-buttons {
 div.social-buttons div {
 	float: right;
 	margin-left: 10px;
+}
+
+.github-icon {
+	margin-top: 15px;
+	margin-left: 100px;
+}
+
+.ninja_onebutton {
+	margin-top: 15px;
+	margin-left: 5px;
 }
 
 div.buttons {
@@ -112,7 +128,9 @@ div.buttons button {
 }
 
 ul.steps {
-	margin: 0px;
+	margin: 0 auto;
+	width: 970px;
+	padding-left: 0;
 }
 
 ul.steps li {
@@ -154,8 +172,17 @@ form#input-kuler {
 form#input-kuler div {
 }
 
+div#input-kular-id-container {
+	width: 900px;
+}
+
 div#input-colourlovers-id-container {
-	margin-top: 20px;
+	margin-top: 10px;
+	width: 900px;
+}
+
+#input-kuler-id, #input-colourlovers-id {
+	margin: 5px 5px 5px 0;
 }
 
 p.input-api-particular {
@@ -165,7 +192,6 @@ p.input-api-particular {
 input.input-id {
 	margin-bottom: 0px;
 	font-size: 130%;
-	height: 26px;
 	width: 300px;
 }
 
@@ -177,7 +203,7 @@ input#forward-to-select-color-button {
 }
 
 #input-kuler-explain {
-	margin-top: 50px;
+	margin-top: 30px;
 	font-size: 90%;
 }
 
@@ -221,25 +247,31 @@ span.open-large-preview-container {
 table#selected-color-table {
 }
 
+table#selected-color-table td {
+	padding: 10px 8px 10px;
+}
+
 table#selected-color-table td.selected-color-item-td {
 	text-align: center;
 	white-space: nowrap;
-	width: 250px;
+	width: 260px;
+	padding-left: 5px;
 }
 
 span.selected-color-item {
 	display: block;
 	float: left;
-	width: 18px;
-	height: 18px;
-	margin: 5px;
-	padding: 1px;
+	/*
+	width: 24px;
+	height: 24px;
+	margin: 5px; 
+	padding: 1px;*/
 	border: none;
 	cursor: pointer;
 }
 
 .selected-color-item-page {
-	width: 200px;
+	/*width: 200px;*/
 	text-align: left;
 }
 
@@ -284,7 +316,7 @@ div#download-container h5 {
 #selecting-kuler-theme-container {
 	font-size: 90%;
 	line-height: 18px;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 #descriptions {
@@ -305,7 +337,7 @@ div#download-container h5 {
 	float: left;
 	width: 20px;
 	height: 20px;
-	padding-top: 10px;
+	padding-top: 5px;
 	cursor: pointer;
 }
 
@@ -314,7 +346,7 @@ div#download-container h5 {
 	float: left;
 	width: 20px;
 	height: 20px;
-	padding-top: 10px;
+	padding-top: 5px;
 	cursor: pointer;
 }
 

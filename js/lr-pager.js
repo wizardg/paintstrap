@@ -26,8 +26,8 @@ $(function() {
 	$(".lr-pager").each(function() {
 		t = $(this);
 
-		t.prepend('<span class="lr-pager-left-arrow"><i class="icon-chevron-left"></i></span>');
-		t.append('<span class="lr-pager-right-arrow"><i class="icon-chevron-right"></i></span>');
+		t.prepend('<span class="lr-pager-left-arrow"><i class="glyphicon glyphicon-chevron-left"></i></span>');
+		t.append('<span class="lr-pager-right-arrow"><i class="glyphicon glyphicon-chevron-right"></i></span>');
 		
 		lrPager.reset(this);
 		

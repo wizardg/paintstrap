@@ -15,7 +15,7 @@ $(function() {
 		
 		$.getJSON(BASE_URL + "api/package_by_id/" + themeId.toString(), {}, function(json) {
 			if (json) {
-				$("#download-dialog-form").attr("action", json["url_zip"]);
+				$("#download-dialog-form").attr("action", json.url_zip);
 				
 				$("#download-dialog-generating").hide();
 				$("#download-dialog-ready").show();
@@ -24,5 +24,7 @@ $(function() {
 				alert(ERROR_MESSAGES.generate_error);
 			}
 		});
+		
+		$('#download-dialog').modal('show');
 	})
 });

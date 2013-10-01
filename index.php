@@ -1,11 +1,11 @@
 <?php
 require_once(dirname(__FILE__) . "/common.inc.php");
 
-define("GALLERY_MAX_PER_PAGE", 20);
+define("GALLERY_MAX_PER_PAGE", 18);
 
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\ArrayAdapter;
-use Pagerfanta\View\TwitterBootstrapView;
+use Pagerfanta\View\TwitterBootstrap3View;
 
 \Slim\Route::setDefaultConditions(array(
     'lang' => 'en|ja'
@@ -40,13 +40,13 @@ function index($app, $lang) {
 	$app->render($lang . "/index.html", array(
 		"lang" => get_lang_url_dir($lang),
 		"this_url" => "",
+		"bootstrap_version" => BOOTSTRAP_VERSION,
 		"active_pages" => array($lang, "home")
 	));
 }
 
 $app->get("/preview/?", function() use ($app) {
 	$url_bootstrap_min_css = BASE_URL . "css/bootstrap.min.css";
-	$url_bootstrap_responsive_min_css = BASE_URL . "css/bootstrap-responsive.min.css";
 	
 	if (check_colors($app->request())) {
 		$api_type = $app->request()->params("api_type");
@@ -56,25 +56,25 @@ $app->get("/preview/?", function() use ($app) {
 		$result_generate = generate($api_type, $id, $c, true);
 		if ($result_generate) {
 			$url_bootstrap_min_css = $result_generate["url_bootstrap_min_css"];
-			//$url_bootstrap_responsive_min_css = $result_generate["url_bootstrap_responsive_min_css"];
-			$url_bootstrap_responsive_min_css = BASE_URL . "css/bootstrap-responsive.min.css";
 		}
 	}
 	
 	$design = $app->request()->params("design");
-	if (is_null($design) || !in_array($design, $GLOBALS["valid_preview_designs"])) {
+	if (is_null($design) || !in_array($design, array_keys($GLOBALS["valid_preview_designs"]))) {
 		$design = "default";
 	}
 	
-	$app->render("common/preview-" . $design . ".html", array(
+	$hiddens = $app->request()->get();
+	unset($hiddens["design"]);
+	
+	$app->render("common/" . $GLOBALS["valid_preview_designs"][$design], array(
 		"url_bootstrap_min_css" => $url_bootstrap_min_css,
-		"url_bootstrap_responsive_min_css" => $url_bootstrap_responsive_min_css
+		"form_hiddens" => $hiddens
 	));
 });
 
 $app->get("/preview_by_id/:theme_id/?", function($theme_id) use ($app) {
 	$url_bootstrap_min_css = BASE_URL . "css/bootstrap.min.css";
-	$url_bootstrap_responsive_min_css = BASE_URL . "css/bootstrap-responsive.min.css";
 	
 	$theme = find_theme($theme_id);
 	if (!is_null($theme)) {
@@ -85,19 +85,19 @@ $app->get("/preview_by_id/:theme_id/?", function($theme_id) use ($app) {
 		$result_generate = generate($api_type, $id, $c, true);
 		if ($result_generate) {
 			$url_bootstrap_min_css = $result_generate["url_bootstrap_min_css"];
-			//$url_bootstrap_responsive_min_css = $result_generate["url_bootstrap_responsive_min_css"];
-			$url_bootstrap_responsive_min_css = BASE_URL . "css/bootstrap-responsive.min.css";
 		}
 	}
 	
 	$design = $app->request()->params("design");
-	if (is_null($design) || !in_array($design, $GLOBALS["valid_preview_designs"])) {
+	if (is_null($design) || !in_array($design, array_keys($GLOBALS["valid_preview_designs"]))) {
 		$design = "default";
 	}
 	
-	$app->render("common/preview-" . $design . ".html", array(
-		"url_bootstrap_min_css" => $url_bootstrap_min_css,
-		"url_bootstrap_responsive_min_css" => $url_bootstrap_responsive_min_css
+	$hiddens = $app->request()->get();
+	unset($hiddens["design"]);
+
+	$app->render("common/" . $GLOBALS["valid_preview_designs"][$design], array(
+		"url_bootstrap_min_css" => $url_bootstrap_min_css
 	));
 });
 
@@ -245,7 +245,7 @@ function gallery($app, $lang) {
 		$themes = array();
 	}
 	
-	$pagerfanta_view = new TwitterBootstrapView();
+	$pagerfanta_view = new TwitterBootstrap3View();
 	$pager_html = $pagerfanta_view->render($pagerfanta, function($page) use ($app, $lang) {
 		$params = array(
 			"page" => $page

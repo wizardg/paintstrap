@@ -16,11 +16,11 @@ var initial_selected_colors = {
 	"default_3_colors": [0, 1, 1, 1, 2, 0, 1],
 	"default_4_colors": [0, 1, 1, 2, 3, 0, 1],
 	"kuler_example_1": [0, 1, 2, 3, 4, 0, 2],
-	"kuler_example_2": [0, 1, 3, 2, 3, 0, 0],
+	"kuler_example_2": [0, 1, 3, 2, 3, 0, 2],
 	"kuler_example_3": [0, 1, 2, 3, 4, 0, 2],
 	"colourlovers_example_1": [0, 1, 2, 3, 4, 0, 2],
-	"colourlovers_example_2": [1, 4, 3, 2, 0, 1, 4],
-	"colourlovers_example_3": [3, 1, 4, 0, 2, 3, 1]
+	"colourlovers_example_2": [1, 4, 3, 2, 0, 1, 3],
+	"colourlovers_example_3": [3, 1, 2, 0, 2, 3, 4]
 };
 
 var initial_selected_color_id = "";
@@ -140,10 +140,10 @@ function changeColorSchemeAPI(api_type) {
 function submitInputKulerID() {
 	var input_id;
 	
-	$("#input-kuler-id-container").removeClass("error");
+	$("#input-kuler-id-container").removeClass("has-error");
 	$("#input-kuler-id-error").text("");
 
-	$("#input-colourlovers-id-container").removeClass("error");
+	$("#input-colourlovers-id-container").removeClass("has-error");
 	$("#input-colourlovers-id-error").text("");
 	
 	api_type = $("input[name=api_type]:checked").val();
@@ -238,7 +238,7 @@ function submitInputKulerID() {
 
 function inputKulerIDError(api_type, msg) {
 	$("#input-" + api_type + "-id-error").text(msg);
-	$("#input-" + api_type + "-id-container").addClass("error");
+	$("#input-" + api_type + "-id-container").addClass("has-error");
 	$("#input-" + api_type + "-id").focus();
 }
 
@@ -346,12 +346,24 @@ function changeSelectedColor(i, j) {
 	
 	for (a = 0; a < COLOR_NUM; a++) {
 		if (a != j) {
-			$("#color-" + i + "-" + a).css("margin", "9px");
-			$("#color-" + i + "-" + a).css("border", "1px solid #333333");
+			$("#color-" + i + "-" + a)
+					.css("margin-top", "4px")
+					.css("margin-bottom", "4px")
+					.css("margin-left", "8px")
+					.css("margin-right", "8px")
+					.css("width", "22px")
+					.css("height", "22px")
+					.css("border", "1px solid #333333");
 		}
 		else {
-			$("#color-" + i + "-" + a).css("margin", "5px");
-			$("#color-" + i + "-" + a).css("border", "5px ridge #999999");
+			$("#color-" + i + "-" + a)
+					.css("margin-top", "0")
+					.css("margin-bottom", "0")
+					.css("margin-left", "4px")
+					.css("margin-right", "4px")
+					.css("width", "30px")
+					.css("height", "30px")
+					.css("border", "5px ridge #999999");
 		}
 	}
 }
@@ -418,6 +430,6 @@ function enableSelectColorPageButtons() {
 }
 
 function openLargePreview() {
-	$url = BASE_URL + 'preview?' + $("#selected-color-form").serialize() + "&design=hero";
+	$url = BASE_URL + 'preview?' + $("#selected-color-form").serialize() + "&design=jumbotron";
 	window.open($url, "_blank");
 }

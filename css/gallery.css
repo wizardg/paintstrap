@@ -1,6 +1,5 @@
 body.gallery .search-container {
 	margin: 30px 0 0 0;
-	text-align: center;
 }
 
 body.gallery select {
@@ -8,19 +7,27 @@ body.gallery select {
 }
 
 body.gallery select.search-by-color {
-	width: 150px;
 }
 
 body.gallery select.search-by-saturation {
-	width: 100px;
 }
 
 body.gallery select.search-by-lightness {
-	width: 100px;
 }
 
 body.gallery .item {
 	text-align: center;
+}
+
+body.gallery .item ul {
+	list-style-type: none;
+	padding-left: 0;
+	margin-bottom: 20px;
+}
+
+body.gallery .item ul li {
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 body.gallery .item img.thumbnail-image {

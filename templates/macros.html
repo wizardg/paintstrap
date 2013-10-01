@@ -5,3 +5,122 @@
 {% macro active(page, active_pages) %}
 {% if page in active_pages %}class="active"{% endif %}
 {% endmacro %}
+
+{% macro color_item(color_no, label) %}
+    <tr>
+        <td>
+        <!--
+            {{ color_no }}:
+        -->
+            {{ label }}
+        </td>
+        <td id="color-{{ color_no }}" class="selected-color-item-td lr-pager">
+        <div class="selected-color-item-page pull-left">
+            <span id="color-{{ color_no }}-0" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="111111" class="hide">
+            </span><span id="color-{{ color_no }}-1" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="211111" class="hide">
+            </span><span id="color-{{ color_no }}-2" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="311111" class="hide">
+            </span><span id="color-{{ color_no }}-3" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="411111" class="hide">
+            </span><span id="color-{{ color_no }}-4" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="511111" class="hide">
+            </span>
+        </div>
+        <div class="selected-color-item-page pull-left">
+            <span id="color-{{ color_no }}-5" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="000000" class="hide">
+            </span>
+            <span id="color-{{ color_no }}-6" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="111111" class="hide">
+            </span>
+            <span id="color-{{ color_no }}-7" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="222222" class="hide">
+            </span>
+            <span id="color-{{ color_no }}-8" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="333333" class="hide">
+            </span>
+            <span id="color-{{ color_no }}-9" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="444444" class="hide">
+            </span>
+        </div>
+        <div class="selected-color-item-page pull-left">
+            <span id="color-{{ color_no }}-10" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="555555" class="hide">
+            </span>
+            <span id="color-{{ color_no }}-11" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="666666" class="hide">
+            </span>
+            <span id="color-{{ color_no }}-12" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="777777" class="hide">
+            </span>
+            <span id="color-{{ color_no }}-13" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="888888" class="hide">
+            </span>
+            <span id="color-{{ color_no }}-14" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="999999" class="hide">
+            </span>
+        </div>
+        <div class="selected-color-item-page pull-left">
+            <span id="color-{{ color_no }}-15" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="AAAAAA" class="hide">
+            </span>
+            <span id="color-{{ color_no }}-16" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="BBBBBB" class="hide">
+            </span>
+            <span id="color-{{ color_no }}-17" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="CCCCCC" class="hide">
+            </span>
+            <span id="color-{{ color_no }}-18" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="DDDDDD" class="hide">
+            </span>
+            <span id="color-{{ color_no }}-19" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="EEEEEE" class="hide">
+            </span>
+        </div>
+        <div class="selected-color-item-page pull-left">
+            <span id="color-{{ color_no }}-20" class="selected-color-item">
+                <input type="radio" name="c[{{ color_no }}]" value="FFFFFF" class="hide">
+            </span>
+        </div></td>
+    </tr>
+{% endmacro %}
+
+{% macro hiddens(form_hiddens, parent = "") %}
+    {% spaceless %}
+    {% for k, v in form_hiddens %}
+        {% if parent != "" %}
+            {% set hidden_name = parent ~ "[" ~ k ~ "]" %}
+        {% else %}
+            {% set hidden_name = k %}
+        {% endif %}
+
+        {% if v is iterable %}
+            {{ _self.hiddens(v, hidden_name) }}
+        {% else %}
+            <input type="hidden" name="{{ hidden_name }}" value="{{ v }}"/>
+        {% endif %}
+    {% endfor %}
+    {% endspaceless %}
+{% endmacro %}
+
+{% macro preview_changer(form_action, form_hiddens) %}
+<div style="width: 48px; height: 48px; border: 1px solid #999999; background-color: #ffffff; padding: 7px 0 0 9px;">
+    <span class="glyphicon glyphicon-list-alt" style="font-size: 24px; color: #000000;"></span>
+    <form id="change-design-form" action="{{ form_action }}" method="get">
+        {{ _self.hiddens(form_hiddens) }}
+        <script>
+            $(function() {
+                $("#change-design").change(function() {
+                    $("#change-design-form").submit();
+                });
+            });
+        </script>
+        <select id="change-design" name="design">
+            <option value="carousel">Carousel</option>
+            <option value="grid">Grid</option>
+        </select>
+    </form>
+</div>
+{% endmacro %}
