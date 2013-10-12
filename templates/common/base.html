@@ -1,42 +1,57 @@
+{% import "macros.html" as macros %}
 <!DOCTYPE HTML>
 <html lang="ja-JP">
-	<head>
-		<meta charset="UTF-8">
-		<title>{% block title %}{% endblock %}</title>
-		<meta name="author" content="Wizard-G">
-		<link href="{{ base_url }}css/bootstrap.min.css" rel="stylesheet">
-		<link href="{{ base_url }}css/style.css" rel="stylesheet">
-		{% block head %}
-		{% endblock %}
-	</head>
-	<body>
-		<div class="navbar">
-			<div class="navbar-inner">
-				<div class="container">
-					<a class="brand" href="{{ base_url }}">PaintStrap</a>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			{% block content %}
-			{% endblock %}
-			<hr>
-			{% block footer %}
-			{% endblock %}
-		</div>
-		
-		<script type="text/javascript">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="author" content="Wizard-G">
+        <link href="{{ base_url }}css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ base_url }}css/style.css" rel="stylesheet">
 
-		  var _gaq = _gaq || [];
-		  _gaq.push(['_setAccount', 'UA-29680388-4']);
-		  _gaq.push(['_trackPageview']);
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="../../assets/js/html5shiv.js"></script>
+          <script src="../../assets/js/respond.min.js"></script>
+        <![endif]-->
 
-		  (function() {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		  })();
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body class="{{ body_class }}">
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ base_url }}{{ lang }}">PaintStrap</a>
+                </div>
+            </div>
+        </div>
+        {% block heading %}
+        {% endblock %}
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+            <hr>
+            {% block footer %}
+            {% endblock %}
+        </div>
 
-		</script>
-	</body>
+        <script type="text/javascript">
+
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-29680388-4']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+
+        </script>
+    </body>
 </html>

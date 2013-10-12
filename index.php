@@ -260,6 +260,7 @@ function gallery($app, $lang) {
 	$app->render($lang . "/gallery.html", array(
 		"lang" => get_lang_url_dir($lang),
 		"this_url" => "gallery/",
+		"bootstrap_version" => BOOTSTRAP_VERSION,
 		"active_pages" => array($lang, "gallery"),
 		"body_class" => "gallery",
 		"themes" => $themes,
