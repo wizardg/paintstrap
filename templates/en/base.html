@@ -39,39 +39,10 @@
 			{% endblock %}
 			{% block content %}
 			{% endblock %}
-			<hr>
 			{% block footer %}
-			<div id="footer" class="row">
-				<div class="span4">
-					<p>
-					Author: <a rel="author" href="http://wizard-g.net" target="_blank">Wizard-G</a><br>
-					<a href="https://twitter.com/wiz_g" class="twitter-follow-button" data-show-count="false">Follow @wiz_g</a>
-					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-					</p>
-					<p>
-					<a href="{{ base_url }}changelog/" target="_blank">ChangeLog</a><br>
-					<a href="{{ base_url }}contact/" target="_blank">Contact</a><br>
-					<a href="http://wizard-g.net/blog/" target="_blank">Blog</a><br>
-					</p>
-				</div>
-				<div class="span4">
-				<p>
-					This site uses <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>, <a href="http://kuler.adobe.com/api/" target="_blank">Adobe kuler API</a> and <a href="http://www.colourlovers.com/api" target="_blank">COLOURlovers API</a>.
-				</p>
-				<p>Twitter Bootstrap version: v2.3.0</p>
-				<p><img src="{{ base_url }}img/ku_36pxWtext.png" style="width: 131px; height: 36px;" alt="colored by Adobe kuler">
-				</p>
-				</div>
-				<div class="span4">
-					{% include 'en/footer_col3.html' %}
-				</div>
-			</div>
 			{% endblock %}
-			<div id="footer-link">
 			{% block footer_link %}
-				{% include 'en/footer_link.html' %}
 			{% endblock %}
-			</div>
 		</div>
 
 		<div id="debug"></div>
