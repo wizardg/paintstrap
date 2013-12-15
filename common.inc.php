@@ -37,8 +37,11 @@ define("BOOTSTRAP_VERSION", "3.0.0");
 
 $GLOBALS["valid_preview_designs"] = array(
 	"default" => "preview-default.html",
-	"hero" => "preview-hero.html",
 	"thumbnail" => "preview-thumbnail.html",
+	"large" => "preview-large.html"
+);
+
+$GLOBALS["valid_preview_large_designs"] = array(
 	"carousel" => "carousel/index.html",
 	"grid" => "grid/index.html",
 	"jumbotron" => "jumbotron/index.html",

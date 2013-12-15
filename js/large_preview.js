@@ -1,13 +1,22 @@
 $(function(){
-	$("body").append('<div style="width: 48px; height: 48px; border: 1px solid #999999; background-color: #ffffff; padding: 7px 0 0 9px;">' +
-			'<span class="glyphicon glyphicon-list-alt" style="font-size: 24px; color: #000000;"></span>' +
-			'<select id="change-design" name="">' +
-			'<option value="carousel">Carousel</option>' +
-			'<option value="grid">Grid</option>' +
-			'</select>' +
-			'</div>');
-	
-	$("#change-design").change(function() {
-		alert("1");
+	$(window).resize(function() {
+		updateLargePreviewSize();
 	});
+	
+	$("#design-changer").change(function() {
+		updateLargePreviewContents($(this).val());
+	});
+	
+	updateLargePreviewSize();
+	updateLargePreviewContents(default_design);
 });
+
+function updateLargePreviewSize() {
+	$("#large-preview").css("width", "100%").css("height", ($(window).height() - 51) + "px");
+}
+
+function updateLargePreviewContents(design) {
+	$("#large-preview").attr("src", "preview_large" + 
+			"?url_bootstrap_min_css=" + encodeURI(url_bootstrap_min_css) +
+			"&design=" + encodeURI(design));
+}
