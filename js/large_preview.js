@@ -16,7 +16,7 @@ function updateLargePreviewSize() {
 }
 
 function updateLargePreviewContents(design) {
-	$("#large-preview").attr("src", "preview_large" + 
+	$("#large-preview").attr("src", base_url + "preview_large" + 
 			"?url_bootstrap_min_css=" + encodeURI(url_bootstrap_min_css) +
 			"&design=" + encodeURI(design));
 }

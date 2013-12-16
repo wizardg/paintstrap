@@ -85,6 +85,24 @@ function connect_db() {
 	return $dbh;
 }
 
+function check_url($url, $extension = null) {
+	if (!preg_match('/^(https?|ftp)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)$/', $url)) {
+		return false;
+	} 
+	
+	if (substr($url, 0, strlen(BASE_URL)) !== BASE_URL) {
+		return false;
+	}
+	
+	if (!is_null($extension)) {
+		if (substr($url, -strlen($extension)) !== $extension) {
+			return false;
+		}
+	}
+	
+	return true;
+}
+
 function check_colors($req) {
 	// api_type
 	$api_type = $req->params("api_type");

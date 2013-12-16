@@ -73,19 +73,6 @@ $app->get("/preview/?", function() use ($app) {
 	));
 });
 
-$app->get("/preview_large/?", function() use ($app) {
-	$url_bootstrap_min_css = $app->request()->params("url_bootstrap_min_css");
-	
-	$design = $app->request()->params("design");
-	if (is_null($design) || !in_array($design, array_keys($GLOBALS["valid_preview_large_designs"]))) {
-		$design = "jumbotron";
-	}
-
-	$app->render("common/" . $GLOBALS["valid_preview_large_designs"][$design], array(
-		"url_bootstrap_min_css" => $url_bootstrap_min_css
-	));
-});
-
 $app->get("/preview_by_id/:theme_id/?", function($theme_id) use ($app) {
 	$url_bootstrap_min_css = BASE_URL . "css/bootstrap.min.css";
 	
@@ -110,6 +97,22 @@ $app->get("/preview_by_id/:theme_id/?", function($theme_id) use ($app) {
 	unset($hiddens["design"]);
 
 	$app->render("common/" . $GLOBALS["valid_preview_designs"][$design], array(
+		"url_bootstrap_min_css" => $url_bootstrap_min_css
+	));
+});
+
+$app->get("/preview_large/?", function() use ($app) {
+	$url_bootstrap_min_css = $app->request()->params("url_bootstrap_min_css");
+	if (!check_url($url_bootstrap_min_css, ".css")) {
+		$url_bootstrap_min_css = BASE_URL . "css/bootstrap.min.css";
+	}
+	
+	$design = $app->request()->params("design");
+	if (is_null($design) || !in_array($design, array_keys($GLOBALS["valid_preview_large_designs"]))) {
+		$design = "jumbotron";
+	}
+
+	$app->render("common/" . $GLOBALS["valid_preview_large_designs"][$design], array(
 		"url_bootstrap_min_css" => $url_bootstrap_min_css
 	));
 });
