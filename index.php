@@ -239,7 +239,7 @@ function gallery($app, $lang) {
 	
 	$tag_ids = get_tag_ids($tag_names);
 
-	$themes_count = get_themes_count($tag_ids);
+	$themes_count = find_themes($api_types, $cs_id, $tag_ids, null, null, true);
 	$array = array();
 	for ($i = 0; $i < $themes_count; $i++) {
 		$array[$i] = $i;

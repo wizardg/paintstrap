@@ -512,16 +512,7 @@ function get_tag_ids($tag_names) {
 	return $ret;
 }
 
-function get_themes_count($tag_ids) {
-	$dbh = connect_db();
-
-	$sql = "select count(*) as c from themes where " . _make_find_themes_where($tag_ids);
-	$result = $dbh->query($sql);
-	$row = $result->fetch(PDO::FETCH_ASSOC);
-	return $row["c"];
-}
-
-function find_themes($api_types, $cs_id, $tag_ids, $limit = null, $offset = null) {
+function find_themes($api_types, $cs_id, $tag_ids, $limit = null, $offset = null, $count_only = false) {
 	$dbh = connect_db();
 	
 	$cs_id_where = "";
@@ -538,23 +529,33 @@ function find_themes($api_types, $cs_id, $tag_ids, $limit = null, $offset = null
 		$api_type_where = " and api_type in (" . implode(",", $quoted_api_types) . ") ";
 	}
 	
-	$sql = "select * from themes where " . _make_find_themes_where($tag_ids) .
-			$cs_id_where .
-			$api_type_where . 
-			" order by created_at desc limit " . $limit . " offset " . $offset;
-	$stmt = $dbh->prepare($sql);
-	$stmt->execute();
-	$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	
-	foreach ($rows as $key => $row) {
-		$rows[$key]["_url_thumbnail"] = BASE_URL . get_thumbnail_path($row["theme_id"]);
-		
-		$created_at_utc = new DateTime($rows[$key]["created_at"]);
-		$created_at_utc->setTimezone(new DateTimeZone('UTC'));
-		$rows[$key]["_created_at_utc"] = $created_at_utc;
+	if ($count_only) {
+		$sql = "select count(*) as c from themes where " . _make_find_themes_where($tag_ids) .
+				$cs_id_where .
+				$api_type_where;
+		$result = $dbh->query($sql);
+		$row = $result->fetch(PDO::FETCH_ASSOC);
+		return $row["c"];
 	}
+	else {
+		$sql = "select * from themes where " . _make_find_themes_where($tag_ids) .
+				$cs_id_where .
+				$api_type_where . 
+				" order by created_at desc limit " . $limit . " offset " . $offset;
+		$stmt = $dbh->prepare($sql);
+		$stmt->execute();
+		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		
-	return $rows;
+		foreach ($rows as $key => $row) {
+			$rows[$key]["_url_thumbnail"] = BASE_URL . get_thumbnail_path($row["theme_id"]);
+			
+			$created_at_utc = new DateTime($rows[$key]["created_at"]);
+			$created_at_utc->setTimezone(new DateTimeZone('UTC'));
+			$rows[$key]["_created_at_utc"] = $created_at_utc;
+		}
+			
+		return $rows;
+	}
 }
 
 function _make_find_themes_where($tag_ids) {
