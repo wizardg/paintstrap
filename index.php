@@ -225,6 +225,13 @@ function gallery($app, $lang) {
 		return;
 	}
 	
+	$cs_id = $app->request()->params("cs_id");
+
+	$api_types = $app->request()->params("api_types");
+	if (!is_array($api_types)) {
+		$api_types = array_keys($GLOBALS["api_type_list"]);
+	}
+	
 	$tag_names = $app->request()->params("tag_names");
 	if (!is_array($tag_names)) {
 		$tag_names = array();
@@ -254,7 +261,7 @@ function gallery($app, $lang) {
 			$themes = array();
 		}
 		else {
-			$themes = find_themes($tag_ids, count($current_page_results), $current_page_results[0]);
+			$themes = find_themes($api_types, $cs_id, $tag_ids, count($current_page_results), $current_page_results[0]);
 		}
 	}
 	catch (Exception $e) {
@@ -282,6 +289,8 @@ function gallery($app, $lang) {
 		"themes" => $themes,
 		"pagerfanta" => $pagerfanta,
 		"pager_html" => $pager_html,
+		"cs_id" => $cs_id,
+		"api_types" => $api_types,
 		"tag_names" => $tag_names
 	));
 }

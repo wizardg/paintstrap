@@ -39,6 +39,19 @@
     <div class="col-md-3 search-container">
         <form action="{{ base_url }}ja/gallery" method="get" role="form">
             <div class="form-group">
+                <label>提供サイト</label>
+                <div class="checkbox">
+                    <label><input type="checkbox" name="api_types[]" value="kuler" {% if "kuler" in api_types %}checked{% endif %}>Adobe kuler</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" name="api_types[]" value="colourlovers" {% if "colourlovers" in api_types %}checked{% endif %}>COLOURlovers</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>カラースキームID</label>
+                <input type="text" name="cs_id" value="{{ cs_id }}" class="form-control">
+            </div>
+            <div class="form-group">
                 <label>カラー</label>
                 <select name="tag_names[]" class="form-control search-by-color">
                     <option value="">指定なし</option>
