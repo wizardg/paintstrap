@@ -37,8 +37,11 @@ define("BOOTSTRAP_VERSION", "3.0.3");
 
 $GLOBALS["valid_preview_designs"] = array(
 	"default" => "preview-default.html",
-	"hero" => "preview-hero.html",
 	"thumbnail" => "preview-thumbnail.html",
+	"large" => "preview-large.html"
+);
+
+$GLOBALS["valid_preview_large_designs"] = array(
 	"carousel" => "carousel/index.html",
 	"grid" => "grid/index.html",
 	"jumbotron" => "jumbotron/index.html",
@@ -80,6 +83,24 @@ function connect_db() {
 		}
 	}
 	return $dbh;
+}
+
+function check_url($url, $extension = null) {
+	if (!preg_match('/^(https?|ftp)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)$/', $url)) {
+		return false;
+	} 
+	
+	if (substr($url, 0, strlen(BASE_URL)) !== BASE_URL) {
+		return false;
+	}
+	
+	if (!is_null($extension)) {
+		if (substr($url, -strlen($extension)) !== $extension) {
+			return false;
+		}
+	}
+	
+	return true;
 }
 
 function check_colors($req) {

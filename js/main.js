@@ -430,6 +430,6 @@ function enableSelectColorPageButtons() {
 }
 
 function openLargePreview() {
-	$url = BASE_URL + 'preview?' + $("#selected-color-form").serialize() + "&design=jumbotron";
+	$url = BASE_URL + 'preview?' + $("#selected-color-form").serialize() + "&design=large";
 	window.open($url, "_blank");
 }
