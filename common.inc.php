@@ -500,10 +500,27 @@ function get_themes_count($tag_ids) {
 	return $row["c"];
 }
 
-function find_themes($tag_ids, $limit = null, $offset = null) {
+function find_themes($api_types, $cs_id, $tag_ids, $limit = null, $offset = null) {
 	$dbh = connect_db();
+	
+	$cs_id_where = "";
+	if ($cs_id != "") {
+		$cs_id_where = " and cs_id = " . $dbh->quote($cs_id) . " ";
+	}
 
-	$sql = "select * from themes where " . _make_find_themes_where($tag_ids) . " order by created_at desc limit " . $limit . " offset " . $offset;
+	$api_type_where = "";
+	if (!empty($api_types)) {
+		$quoted_api_types = array();
+		foreach ($api_types as $api_type) {
+			$quoted_api_types[] = $dbh->quote($api_type);
+		}
+		$api_type_where = " and api_type in (" . implode(",", $quoted_api_types) . ") ";
+	}
+	
+	$sql = "select * from themes where " . _make_find_themes_where($tag_ids) .
+			$cs_id_where .
+			$api_type_where . 
+			" order by created_at desc limit " . $limit . " offset " . $offset;
 	$stmt = $dbh->prepare($sql);
 	$stmt->execute();
 	$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
