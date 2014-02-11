@@ -32,8 +32,8 @@ require_once("snappy/autoload.php");
 
 define("COLOR_INPUT_NUM", 7);
 
-define("OUTPUT_VERSION", "7");
-define("BOOTSTRAP_VERSION", "3.0.3");
+define("OUTPUT_VERSION", "8");
+define("BOOTSTRAP_VERSION", "3.1.0");
 
 $GLOBALS["valid_preview_designs"] = array(
 	"default" => "preview-default.html",
@@ -230,6 +230,7 @@ function generate($api_type, $id, $c, $preview = false) {
 		$command = sprintf(COMMAND_LESSC_COMPRESS, escapeshellarg($path_bootstrap_less), escapeshellarg($path_bootstrap_min_css));
 		$command = fix_directory_separater($command);
 		$output = array();
+		//error_log($command);
 		exec($command, $output);
 	}
 		
