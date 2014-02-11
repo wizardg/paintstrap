@@ -42,7 +42,10 @@ $GLOBALS["valid_preview_designs"] = array(
 );
 
 $GLOBALS["valid_preview_large_designs"] = array(
+	"blog" => "blog/index.html",
 	"carousel" => "carousel/index.html",
+	//"cover" => "cover/index.html",
+	"dashboard" => "dashboard/index.html",
 	"grid" => "grid/index.html",
 	"jumbotron" => "jumbotron/index.html",
 	"jumbotron-narrow" => "jumbotron-narrow/index.html",
@@ -52,7 +55,6 @@ $GLOBALS["valid_preview_large_designs"] = array(
 	"navbar-static-top" => "navbar-static-top/index.html",
 	"non-responsive" => "non-responsive/index.html",
 	"offcanvas" => "offcanvas/index.html",
-	"screenshots" => "screenshots/index.html",
 	"signin" => "signin/index.html",
 	"starter-template" => "starter-template/index.html",
 	"sticky-footer" => "sticky-footer/index.html",

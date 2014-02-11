@@ -113,7 +113,8 @@ $app->get("/preview_large/?", function() use ($app) {
 	}
 
 	$app->render("common/" . $GLOBALS["valid_preview_large_designs"][$design], array(
-		"url_bootstrap_min_css" => $url_bootstrap_min_css
+		"url_bootstrap_min_css" => $url_bootstrap_min_css,
+		"url_assets_examples" => BASE_URL . "assets-examples/"
 	));
 });
 

@@ -2,48 +2,46 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <meta name="robots" content="noindex,nofollow">
-        <link rel="shortcut icon" href="assets/ico/favicon.png">
 
-        <title>Starter Template for Bootstrap</title>
+        <title>Jumbotron Template for Bootstrap</title>
 
         <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" type="text/css" href="{{ url_bootstrap_min_css }}">
+        <link href="{{ url_bootstrap_min_css }}" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
-        <script src="assets/js/html5shiv.js"></script>
-        <script src="assets/js/respond.min.js"></script>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        
+
         <style>
             body {
                 padding-top: 50px;
             }
-            
+
             .jumbotron {
                 padding: 20px 0 !important;
                 margin-bottom: 20px;
             }
-            
+
             .jumbotron h1 {
                 font-size: 28px;
                 margin: 10px 0px;
             }
         </style>
 
-		<script type="text/javascript">
-		<!--
-			parent.postPreviewLoad();
-		//-->
-		</script>
+        <script type="text/javascript">
+        <!--
+            parent.postPreviewLoad();
+        //-->
+        </script>
     </head>
 
     <body>
-
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -103,7 +101,7 @@
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="assets/js/jquery.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="{{ base_url }}js/bootstrap.min.js"></script>
     </body>
 </html>
