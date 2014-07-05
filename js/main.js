@@ -173,7 +173,7 @@ function submitInputKulerID() {
 			if (input_id.match(/^\d{1,10}$/)) {
 				// do nothing
 			}
-			else if (input_id.match(/^https?\:\/\/kuler\.adobe\.com\/.*?\#themeID\/(\d+)/)) {
+			else if (input_id.match(/^https?\:\/\/kuler\.adobe\.com\/.*\-(\d+)\/?$/)) {
 				input_id = RegExp.$1;
 			}
 			else {
