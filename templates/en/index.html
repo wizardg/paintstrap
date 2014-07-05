@@ -21,6 +21,9 @@
 		color_scheme_not_exists : "An input theme does not exist or cannot use.",
 		generate_error : "CSS files generate error."
 	};
+	
+	var arg_api_type = {{ api_type|json_encode()|raw }};
+	var arg_cs_id = {{ cs_id|json_encode()|raw }};
 	//-->
 </script>
 {% endblock %}

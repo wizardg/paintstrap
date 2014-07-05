@@ -111,11 +111,23 @@ $(document).ready(function(){
 	enableInputKulerPageButtons();
 	enableSelectColorPageButtons();
 
-	$("#input-kuler-id").val("");
-	$("#input-colourlovers-id").val("");
-	
-	$("input[name=api_type]").val(["kuler"]);
-	changeColorSchemeAPI("kuler");
+	$("input[name=api_type]").val([arg_api_type]);
+	changeColorSchemeAPI(arg_api_type);
+
+	switch (arg_api_type) {
+		case "kuler":
+			$("#input-kuler-id").val(arg_cs_id);
+			$("#input-colourlovers-id").val("");
+			break;
+		case "colourlovers":
+			$("#input-kuler-id").val("");
+			$("#input-colourlovers-id").val(arg_cs_id);
+			break;
+		default:
+			$("#input-kuler-id").val("");
+			$("#input-colourlovers-id").val("");
+			break;
+	}
 	
 	$("#input-colourlovers-id").focus();
 });

@@ -36,12 +36,26 @@ function index($app, $lang) {
 		$app->notFound();
 		return;
 	}
+	
+	$api_type = $app->request()->params("api_type");
+	if (isset($GLOBALS["api_type_list"][$api_type])) {
+		$cs_id = $app->request()->params("cs_id");
+		if (!ctype_digit($cs_id)) {
+			$cs_id = "";
+		}
+	}
+	else {
+		$api_type = "kuler";
+		$cs_id = "";
+	}
 
 	$app->render($lang . "/index.html", array(
 		"lang" => get_lang_url_dir($lang),
 		"this_url" => "",
 		"bootstrap_version" => BOOTSTRAP_VERSION,
-		"active_pages" => array($lang, "home")
+		"active_pages" => array($lang, "home"),
+		"api_type" => $api_type,
+		"cs_id" => $cs_id
 	));
 }
 

@@ -129,18 +129,20 @@ if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_2e1da2a599ecba6fa5456222f09e5f75)=='u
                 <li class="col-md-4 theme-{{ theme.theme_id }}">
                     <div class="thumbnail">
                         {% if theme.api_type == "kuler" %}
-                        <p class="using-color-scheme-container">
-                            <span class="kuler-icon">&nbsp;</span>
-                            <a href="http://kuler.adobe.com/index.cfm#themeID/{{ theme.cs_id }}" target="_blank">kuler #{{ theme.cs_id }}</a>
-                        </p>
+	                        <p class="using-color-scheme-container">
+	                            <span class="kuler-icon">&nbsp;</span>
+	                            <a href="{{ base_url }}{{ lang }}?api_type={{ theme.api_type|url_encode }}&cs_id={{ theme.cs_id|url_encode }}">kuler #{{ theme.cs_id }}</a>
+	                        </p>
+	                        <img class="thumbnail-image" src="{{ theme._url_thumbnail }}" alt="">
+	                        <h4 class="theme-name"><a href="http://kuler.adobe.com/index.cfm#themeID/{{ theme.cs_id }}" target="_blank">{{ theme.cs_name }}</a></h4>
                         {% elseif theme.api_type == "colourlovers" %}
-                        <p class="using-color-scheme-container">
-                            <span class="colourlovers-icon">&nbsp;</span>
-                            <a href="http://www.colourlovers.com/palette/{{ theme.cs_id }}" target="_blank">COLOURlovers #{{ theme.cs_id }}</a>
-                        </p>
+	                        <p class="using-color-scheme-container">
+	                            <span class="colourlovers-icon">&nbsp;</span>
+	                            <a href="{{ base_url }}{{ lang }}?api_type={{ theme.api_type|url_encode }}&cs_id={{ theme.cs_id|url_encode }}">COLOURlovers #{{ theme.cs_id }}</a>
+	                        </p>
+	                        <img class="thumbnail-image" src="{{ theme._url_thumbnail }}" alt="">
+	                        <h4 class="theme-name"><a href="http://www.colourlovers.com/palette/{{ theme.cs_id }}" target="_blank">{{ theme.cs_name }}</a></h4>
                         {% endif %}
-                        <img class="thumbnail-image" src="{{ theme._url_thumbnail }}" alt="">
-                        <h4 class="theme-name">{{ theme.cs_name }}</h4>
                         <p>
                             Added: {{ theme._created_at_utc | date("m.d.Y", false) }}
                         </p>

@@ -21,6 +21,9 @@
 		color_scheme_not_exists : "入力されたカラースキームは存在しないか、または利用できません。",
 		generate_error : "CSSファイルの生成でエラーが発生しました。"
 	};
+	
+	var arg_api_type = {{ api_type|json_encode()|raw }};
+	var arg_cs_id = {{ cs_id|json_encode()|raw }};
 	//-->
 </script>
 {% endblock %}
