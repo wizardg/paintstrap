@@ -23,6 +23,11 @@ body {
 .navbar {
 }
 
+.jumbotron {
+	background: url("../img/a0070_000076_back.jpg");
+	background-size: cover;
+}
+
 .jumbotron h1 {
 	
 }
