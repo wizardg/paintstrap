@@ -32,7 +32,7 @@ require_once("snappy/autoload.php");
 
 define("COLOR_INPUT_NUM", 7);
 
-define("OUTPUT_VERSION", "10");
+define("OUTPUT_VERSION", "11");
 define("BOOTSTRAP_VERSION", "3.2.0");
 
 $GLOBALS["valid_preview_designs"] = array(
