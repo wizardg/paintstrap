@@ -24,7 +24,7 @@
 @gray-light:             lighten(@gray-base, 46.7%); // #777
 @gray-lighter:           lighten(@gray-base, 93.5%); // #eee
 
-@brand-primary:         #<?= $c[1] ?>;
+@brand-primary:         @ps-link-text;
 @brand-success:         #5cb85c;
 @brand-info:            #5bc0de;
 @brand-warning:         #f0ad4e;
@@ -41,7 +41,7 @@
 @text-color:            @ps-text;
 
 //** Global textual link color.
-@link-color:            @ps-link-text;
+@link-color:            @brand-primary;
 //** Link hover color set via `darken()` function.
 @link-hover-color:      darken(@link-color, 15%);
 //** Link hover decoration.
