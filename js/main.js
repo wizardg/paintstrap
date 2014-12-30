@@ -19,7 +19,7 @@ var initial_selected_colors = {
 	"kuler_example_2": [0, 1, 3, 2, 3, 0, 2],
 	"kuler_example_3": [0, 1, 2, 3, 4, 0, 2],
 	"colourlovers_example_1": [0, 1, 2, 3, 4, 0, 2],
-	"colourlovers_example_2": [1, 4, 3, 2, 0, 1, 3],
+	"colourlovers_example_2": [4, 3, 2, 1, 0, 4, 2],
 	"colourlovers_example_3": [3, 1, 2, 0, 2, 3, 4]
 };
 
