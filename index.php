@@ -241,6 +241,9 @@ function gallery($app, $lang) {
 	}
 	
 	$cs_id = $app->request()->params("cs_id");
+	if (!empty($cs_id) && !is_string($cs_id)) {
+		$cs_id = null;
+	}
 
 	$api_types = $app->request()->params("api_types");
 	if (!is_array($api_types)) {
@@ -284,14 +287,23 @@ function gallery($app, $lang) {
 	}
 	
 	$pagerfanta_view = new TwitterBootstrap3View();
-	$pager_html = $pagerfanta_view->render($pagerfanta, function($page) use ($app, $lang) {
+	$pager_html = $pagerfanta_view->render($pagerfanta, function($page) use ($app, $lang, $cs_id, $api_types, $tag_names) {
 		$params = array(
 			"page" => $page
 		);
-		$tag_names = $app->request()->params("tag_names");
+		
+		if ($cs_id != "") {
+			$params["cs_id"] = $cs_id;
+		}
+		
+		if (count($api_types) > 0) {
+			$params["api_types"] = $api_types;
+		}
+		
 		if (count($tag_names) > 0) {
 			$params["tag_names"] = $tag_names;
 		}
+		
 		return BASE_URL . get_lang_url_dir($lang) . "gallery?" . http_build_query($params);
 	});
 	
