@@ -8,8 +8,8 @@
 !/var/cache/.gitkeep
 /var/compilation_cache/*
 !/var/compilation_cache/.gitkeep
-/gallery/output/*
-!/gallery/output/.gitkeep
+/gallery_output/output/*
+!/gallery_output/output/.gitkeep
 footer_col3.html
 footer_link.html
 /cron/cron.sh

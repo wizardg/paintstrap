@@ -296,7 +296,7 @@ function generate($api_type, $id, $c, $preview = false) {
 
 function get_thumbnail_path($theme_id) {
 	$theme_id_md5_2 = substr(md5($theme_id), 0, 2);
-	$path_image = "gallery/output/" . $theme_id_md5_2 . "/" . $theme_id . ".png";
+	$path_image = "gallery_output/output/" . $theme_id_md5_2 . "/" . $theme_id . ".png";
 	return $path_image;
 }
 
