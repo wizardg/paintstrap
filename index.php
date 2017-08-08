@@ -45,7 +45,7 @@ function index($app, $lang) {
 		}
 	}
 	else {
-		$api_type = "kuler";
+		$api_type = "colourlovers";
 		$cs_id = "";
 	}
 

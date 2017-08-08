@@ -93,27 +93,27 @@ if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_2e1da2a599ecba6fa5456222f09e5f75)=='u
         <div id="input-kuler-id-container" class="form-group">
             <p>
                 <label>
-                    <input type="radio" name="api_type" value="kuler" checked>
-                    Adobe kulerのカラースキーム(配色テーマ)を使う</label>
+                    <input type="radio" name="api_type" value="kuler" disabled>
+                    <s>Adobe kulerのカラースキーム(配色テーマ)を使う</s></label>
             </p>
             <p class="input-api-particular">
-                <!--
                 <span class="announce">
-                現在、Adobe kuler APIがメンテナンス中につき、利用することができません。
+                ※現在利用できません。
                 </span><br>
-                -->
                 テーマのID、またはパーマリンクURLを入力してください:
                 <br>
-                <input id="input-kuler-id" class="input-id form-control" type="text" name="kuler_id" value="">
+                <input id="input-kuler-id" class="input-id form-control" type="text" name="kuler_id" value="" disabled>
                 <span id="input-kuler-id-error" class="help-inline control-label"></span>
+                <!--
                 <br>
                 例: <a class="input-kuler-example" href="javascript:void(0);"><span class="example-no hide">1</span><span class="kuler-id">1084168</span></a>,&nbsp; <a class="input-kuler-example" href="javascript:void(0);"><span class="example-no hide">2</span><span class="kuler-id">1006374</span></a>,&nbsp; <a class="input-kuler-example" href="javascript:void(0);"><span class="example-no hide">3</span><span class="kuler-id">2043016</span></a>
+                -->
             </p>
         </div>
         <div id="input-colourlovers-id-container" class="form-group">
             <p>
                 <label>
-                    <input type="radio" name="api_type" value="colourlovers">
+                    <input type="radio" name="api_type" value="colourlovers" checked>
                     COLOURloversのカラースキーム(パレット)を使う</label>
             </p>
             <p class="input-api-particular">
